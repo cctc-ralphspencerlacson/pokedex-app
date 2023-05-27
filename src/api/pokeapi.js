@@ -17,7 +17,7 @@ export const getPokeApi = async (endpoint) => {
 
 export const getPokemons = async (offset, limit) => {
     const baseUrl = "https://pokeapi.co/api/v2/"
-    let parameters = `pokemon?offset=${offset}&limit=${limit}`;
+    let parameters = `pokemon-species?offset=${offset}&limit=${limit}`;
 
     try {
         const response = await axios.get(baseUrl + parameters);
@@ -27,13 +27,23 @@ export const getPokemons = async (offset, limit) => {
     }
 }
 
-export const getPokemonsDEtails = async (idt) => {
+export const getPokemonData = async (name) => {
     const baseUrl = "https://pokeapi.co/api/v2/"
-    let parameters = `pokemon/${id}`;
+    let pokemonParam = `pokemon/${name}`;
+    let speciesParam = `pokemon-species/${name}`;
 
     try {
-        const response = await axios.get(baseUrl + parameters);
-        return response.data;
+        const pokemonResponse = await axios.get(baseUrl + pokemonParam);
+        const speciesResponse = await axios.get(baseUrl + speciesParam);
+        
+        const [pokemonData, speciesData] = await Promise.all([pokemonResponse, speciesResponse]);
+
+        const data = {
+            pokemon: await pokemonData.data,
+            species: await speciesData.data
+        }
+
+        return data;
     } catch (error) {
         console.error(error);
     }

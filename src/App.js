@@ -1,4 +1,4 @@
-import PokeList from "./components/List";
+import PokeList from "./components/PokeList";
 
 import './App.css';
 
