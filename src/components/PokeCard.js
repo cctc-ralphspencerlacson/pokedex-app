@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
+// Component
+import BouncingPokeball from "./BouncingPokeball/BouncingPokeball";
 // API
 import { getPokemonData } from "../api/pokeapi.js";
 // Utils
 import { removeHyphenAndCapitalize } from "../utils/StringUtils.js";
 
 function PokeCard(props) {
-  const {pokemon} = props;
+  const {name} = props;
 
   const [pokeData, setPokeData] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -21,7 +23,7 @@ function PokeCard(props) {
   const fetchPokemonData = async () => {
     try {
         setLoading(true);
-        const apiData = await getPokemonData(pokemon);
+        const apiData = await getPokemonData(name);
         setPokeData(apiData);
         setLoading(false);
     } catch (error) {
@@ -33,10 +35,10 @@ function PokeCard(props) {
     <>
     {!loading ? (
         <div key={pokeData?.pokemon?.id}>
-            <p> {removeHyphenAndCapitalize(pokemon)} </p>
+            <p> {removeHyphenAndCapitalize(name)} </p>
         </div>
     ) : (
-        <p>Catching Pokemon...</p>
+        <BouncingPokeball />
     )}
     </>
   );

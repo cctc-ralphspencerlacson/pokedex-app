@@ -49,18 +49,18 @@ function PokeList() {
 
   return (
     <div>
-      {loading ? (
-        <p>Loading...</p>
-      ) : (
+      {!loading ? (
         <div>
           {pokemons.results.map((pokemon) => (
-            <PokeCard pokemon={pokemon.name} />
+            <PokeCard name={pokemon.name} />
           ))}
 
           {/* Pagination */}
           <button onClick={handlePrevPage} disabled={offset === 0}> Previous Page </button>
           <button onClick={handleNextPage} disabled={pokemons.next === null}>Next Page</button>
         </div>
+      ) : (
+        <p>Loading...</p>
       )}
     </div>
   );
