@@ -4,7 +4,7 @@ import PokeCard from "./PokeCard";
 // API
 import { getPokemons } from "../api/pokeapi.js";
 
-function PokeList() {
+const PokeList = () => {
   const [pokemons, setPokemons] = useState([]);
   const [loading, setLoading] = useState([]);
   const [offset, setOffset] = useState(0);

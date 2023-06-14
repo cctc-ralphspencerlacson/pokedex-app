@@ -6,20 +6,15 @@ import { getPokemonData } from "../api/pokeapi.js";
 // Utils
 import { removeHyphenAndCapitalize } from "../utils/StringUtils.js";
 
-function PokeCard(props) {
-  const {name} = props;
-
+const PokeCard = (props) => {
+  const { name } = props;
   const [pokeData, setPokeData] = useState(null);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    fetchPokemonData()
+    fetchPokemonData();
   }, []);
 
-  /**
-   * Get details of Pokemon and its Specie
-   * - Assign to pokeData (useState)
-   */
   const fetchPokemonData = async () => {
     try {
         setLoading(true);
@@ -33,13 +28,13 @@ function PokeCard(props) {
 
   return (
     <>
-    {!loading ? (
-        <div key={pokeData?.pokemon?.id}>
-            <p> {removeHyphenAndCapitalize(name)} </p>
+      {!loading ? (
+        <div>
+          <p>{removeHyphenAndCapitalize(name)}</p>
         </div>
-    ) : (
+      ) : (
         <BouncingPokeball />
-    )}
+      )}
     </>
   );
 }

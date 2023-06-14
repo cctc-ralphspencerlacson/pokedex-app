@@ -1,6 +1,6 @@
 import './BouncingPokeball.css';
 
-function BouncingPokeball() {
+const BouncingPokeball = () => {
 
   return (
     <div className="pokeball bounce"></div>
