@@ -1,11 +1,11 @@
-import PokeList from "./components/PokeList";
+import PokeHome from "./components/PokeHome";
 
 import './App.css';
 
 function App() {
   return (
     <div className="App">
-      <PokeList />
+      <PokeHome limit={1}/>
     </div>
   );
 }

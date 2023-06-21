@@ -18,18 +18,22 @@ const PokeCard = (props) => {
   const fetchPokemonData = async () => {
     try {
         setLoading(true);
+
         const apiData = await getPokemonData(name);
         setPokeData(apiData);
+
         setLoading(false);
     } catch (error) {
         console.log("fetchPokemonData: err: " + error);
     }
   }
 
+  console.log("pokemon: cards", pokeData)
+
   return (
     <>
       {!loading ? (
-        <div>
+        <div className="card">
           <p>{removeHyphenAndCapitalize(name)}</p>
         </div>
       ) : (

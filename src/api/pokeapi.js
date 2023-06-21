@@ -4,6 +4,8 @@
 
 import axios from "axios";
 
+const baseUrl = "https://pokeapi.co/api/v2/"
+
 export const getPokeApi = async (endpoint) => {
 
     try {
@@ -14,9 +16,7 @@ export const getPokeApi = async (endpoint) => {
     }
 }
 
-
 export const getPokemons = async (offset, limit) => {
-    const baseUrl = "https://pokeapi.co/api/v2/"
     let parameters = `pokemon-species?offset=${offset}&limit=${limit}`;
 
     try {
@@ -28,7 +28,6 @@ export const getPokemons = async (offset, limit) => {
 }
 
 export const getPokemonData = async (name) => {
-    const baseUrl = "https://pokeapi.co/api/v2/"
     let pokemonParam = `pokemon/${name}`;
     let speciesParam = `pokemon-species/${name}`;
 
