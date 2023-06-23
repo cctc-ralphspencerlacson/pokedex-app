@@ -41,12 +41,10 @@ const PokeCard = (props) => {
 
   const setFlash = () => isVisible && "flash";
   const getBackgroundColor = () => pokeData ? pokeData?.color : 'default';
+  const getPokemonHeight = (height) => height + 400;
   const getPokemonImage = () => {
-    return pokeData?.sprites.default.front;
+    return pokeData?.artwork.default.front;
   }
-  
-console.log(getPokemonImage())
-  console.log("pokemon: cards", pokeData)
 
   return (
     <>
@@ -55,7 +53,11 @@ console.log(getPokemonImage())
           <>
             <p className="id">{`#${pokeData?.id}`}</p>
             <p className="name-en">{removeHyphenAndCapitalize(name)}</p>
-            <img src={getPokemonImage()} alt={`${pokeData?.id}-${pokeData?.name.en}-sprite`} />
+            <img 
+              src={getPokemonImage()} 
+              alt={`${pokeData?.id}-${pokeData?.name.en}-sprite`} 
+              style={{height: getPokemonHeight(pokeData?.height)}}
+            />
             <p className="name-jp">{pokeData?.name.jp}</p>
           </>
       ) : (

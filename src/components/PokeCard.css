@@ -14,6 +14,7 @@
     -o-transition: background-color 5s ease-out;
     transition: background-color 5s ease-out;
   
+    overflow: hidden;
 }
 
 .home .list .card.flash{
@@ -88,9 +89,4 @@
     position: absolute;
     bottom: 0;
     left: 0.8;
-}
-
-.home .list .card img {
-    height: 30rem;
-    width: 30rem;
 }

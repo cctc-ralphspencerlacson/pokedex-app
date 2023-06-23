@@ -53,7 +53,14 @@ export const getPokemonData = async (name) => {
             types: pokemonData.data.types,
             abilities: pokemonData.data.abilities,
             hasGenderDiff: speciesData.data.has_gender_differences,
-
+            artwork: {
+                default: {
+                    front: pokemonData?.data?.sprites?.other['official-artwork']?.front_default
+                },
+                shiny: {
+                    shiny: pokemonData?.data?.sprites?.other['official-artwork']?.front_shiny
+                }
+            },
             sprites: {
                 default: {
                     front: pokemonData.data.sprites.front_default,
@@ -73,7 +80,7 @@ export const getPokemonData = async (name) => {
                 }
             },
 
-            held_items: pokemonData.data.held_items
+            held_items: pokemonData.data.held_items,
         }
 
         return data;
