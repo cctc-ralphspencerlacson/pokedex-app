@@ -1,15 +1,16 @@
 // Component
 import PokeCard from "./PokeCard";
+import './PokeList.css';
 
 const PokeList = (props) => {
   const { pokemons } = props;
   
   return(
-    <>
-    {pokemons.results.map((pokemon) => (
-      <PokeCard name={pokemon.name} />
-    ))}
-    </>
+    <div className="list">
+      {pokemons.results.map((pokemon) => (
+        <PokeCard name={pokemon.name} />
+      ))}
+    </div>
   );
 }
 

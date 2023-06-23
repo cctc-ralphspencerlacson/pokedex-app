@@ -12,3 +12,18 @@ html {
 .App {
   text-align: center;
 }
+
+/* Background Colors */
+:root {
+  --black: #47565B;
+  --blue: #93C5FD;
+  --brown: #FBBF24;
+  --gray:  #71717A;
+  --green: #BEF264;
+  --pink: #F9A8D4;
+  --purple: #D8B4FE;
+  --red: #FCA5A5;
+  --white: #D4D4D8;
+  --yellow: #FDE047;
+  --default: #E2E8F0;
+}

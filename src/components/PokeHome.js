@@ -3,7 +3,9 @@ import { useEffect, useState } from "react";
 import PokeSearch from "./PokeSearch";
 import PokeList from "./PokeList";
 // API
-import { getPokemons } from "../api/pokeapi.js";
+import { getPokemons, getPokemonData } from "../api/pokeapi.js";
+// CSS
+import './PokeHome.css';
 
 const PokeHome = (props) => {
   const { limit } = props;
@@ -25,7 +27,7 @@ const PokeHome = (props) => {
   const fetchPokemons = async () => {
     try {
       setLoading(true);
-
+      
       const apiData = await getPokemons(offset, limit);
       setPokemons(apiData)
 
@@ -52,7 +54,7 @@ const PokeHome = (props) => {
   };
 
   return (
-    <div className="list">
+    <div className="home">
       {!loading ? (
         <div>
           <PokeSearch setSearchQuery={setSearchQuery} />

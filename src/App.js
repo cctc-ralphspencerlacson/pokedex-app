@@ -5,7 +5,7 @@ import './App.css';
 function App() {
   return (
     <div className="App">
-      <PokeHome limit={1}/>
+      <PokeHome limit={20}/>
     </div>
   );
 }
