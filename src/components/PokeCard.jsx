@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 // Component
 import BouncingPokeball from "./BouncingPokeball/BouncingPokeball";
 // API
-import { getPokemonData } from "../api/pokeapi.js";
+import { getPokemonData } from "../service/pokeapi.js";
 // Utils
 import { removeHyphenAndCapitalize } from "../utils/StringUtils.js";
 // CSS
@@ -41,7 +41,7 @@ const PokeCard = (props) => {
 
   const setFlash = () => isVisible && "flash";
   const getBackgroundColor = () => pokeData ? pokeData?.color : 'default';
-  const getPokemonHeight = (height) => height + 400;
+  const getPokemonHeight = (height) => height + 350;
   const getPokemonImage = () => {
     return pokeData?.artwork.default.front;
   }

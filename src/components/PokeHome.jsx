@@ -3,9 +3,10 @@ import { useEffect, useState } from "react";
 import PokeSearch from "./PokeSearch";
 import PokeList from "./PokeList";
 // API
-import { getPokemons, getPokemonData } from "../api/pokeapi.js";
+import { getPokemons } from "../service/pokeapi.js";
 // CSS
 import './PokeHome.css';
+import PokeNav from "./PokeNav";
 
 const PokeHome = (props) => {
   const { limit } = props;
@@ -13,6 +14,7 @@ const PokeHome = (props) => {
   const [pokemons, setPokemons] = useState([]);
   const [loading, setLoading] = useState([]);
   const [offset, setOffset] = useState(0);
+  const [page, setPage] = useState(0);
 
   const setSearchQuery = (query) => setQuery(query);
 
@@ -38,21 +40,23 @@ const PokeHome = (props) => {
   }
 
   /**
-   * Get next page of pokemon list
-   */
-  const handleNextPage = () => {
-    setOffset(offset + limit);
-  };
-
-  /**
    * Get previous page of pokemon list
    */
   const handlePrevPage = () => {
     if (offset >= limit) {
       setOffset(offset - limit);
+      setPage(offset/limit);
     }
   };
 
+  /**
+   * Get next page of pokemon list
+   */
+  const handleNextPage = () => {
+    setOffset(offset + limit);
+    setPage(offset/limit);
+  };
+  
   return (
     <div className="home">
       {!loading ? (
@@ -60,9 +64,13 @@ const PokeHome = (props) => {
           <PokeSearch setSearchQuery={setSearchQuery} />
           <PokeList pokemons={pokemons} />
 
-          {/* Pagination */}
-          <button onClick={handlePrevPage} disabled={offset === 0}> Previous Page </button>
-          <button onClick={handleNextPage} disabled={pokemons.next === null}>Next Page</button>
+          <PokeNav 
+            offset={offset}
+            limit={limit}
+            hasNext={pokemons.next === null} 
+            handlePrevPage={handlePrevPage} 
+            handleNextPage={handleNextPage}
+          />
         </div>
       ) : (
         <p>Loading...</p>
