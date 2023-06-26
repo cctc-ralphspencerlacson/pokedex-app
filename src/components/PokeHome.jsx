@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import PokeSearch from "./PokeSearch";
 import PokeList from "./PokeList";
 // API
-import { getPokemons } from "../service/pokeapi.js";
+import { getPokemonsPaginated } from "../service/pokeapi.js";
 // CSS
 import './PokeHome.css';
 import PokeNav from "./PokeNav";
@@ -30,7 +30,7 @@ const PokeHome = (props) => {
     try {
       setLoading(true);
       
-      const apiData = await getPokemons(offset, limit);
+      const apiData = await getPokemonsPaginated(offset, limit);
       setPokemons(apiData)
 
       setLoading(false);

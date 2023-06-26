@@ -16,7 +16,7 @@ export const getPokeApi = async (endpoint) => {
     }
 }
 
-export const getPokemons = async (offset, limit) => {
+export const getPokemonsPaginated = async (offset, limit) => {
     let parameters = `pokemon-species?offset=${offset}&limit=${limit}`;
 
     try {
@@ -45,7 +45,8 @@ export const getPokemonData = async (name) => {
             },
             description: speciesData.data.flavor_text_entries[1].flavor_text,
             color: speciesData.data.color.name,
-            generation: speciesData.data.generation,
+            generation: speciesData.data.generation.name,
+            region: await getPokemonRegion(speciesData.data.generation.url),
 
             height: pokemonData.data.height,
             weight: pokemonData.data.weight,
@@ -84,6 +85,15 @@ export const getPokemonData = async (name) => {
         }
 
         return data;
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+export const getPokemonRegion = async (query) => {
+    try {
+        const response = await axios.get(query);
+        return response.data.main_region.name;
     } catch (error) {
         console.error(error);
     }

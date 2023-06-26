@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 // Component
 import BouncingPokeball from "./BouncingPokeball/BouncingPokeball";
 // API
-import { getPokemonData } from "../service/pokeapi.js";
+import { getPokemonData, getPokemonRegion } from "../service/pokeapi.js";
 // Utils
 import { removeHyphenAndCapitalize } from "../utils/StringUtils.js";
 // CSS
@@ -46,6 +46,7 @@ const PokeCard = (props) => {
     return pokeData?.artwork.default.front;
   }
 
+  console.log(pokeData)
   return (
     <>
     <div key={pokeData?.id} className={`card bg-${getBackgroundColor()} ${setFlash()}`}>
@@ -53,6 +54,9 @@ const PokeCard = (props) => {
           <>
             <p className="id">{`#${pokeData?.id}`}</p>
             <p className="name-en">{removeHyphenAndCapitalize(name)}</p>
+            <p className="region">{`Region: ${pokeData?.region}`}</p>
+            <p className="height">{`Height: ${pokeData?.height}`}</p>
+            <p className="weight">{`Weight: ${pokeData?.weight}`}</p>
             <img 
               src={getPokemonImage()} 
               alt={`${pokeData?.id}-${pokeData?.name.en}-sprite`} 

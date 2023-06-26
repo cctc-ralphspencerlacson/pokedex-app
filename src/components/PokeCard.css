@@ -63,7 +63,10 @@
 
 .home .list .card .id,
 .home .list .card .name-en,
-.home .list .card .name-jp {
+.home .list .card .name-jp,
+.home .list .card .region,
+.home .list .card .height,
+.home .list .card .weight {
     color: white;
     font-weight: 900;
 }
@@ -83,13 +86,34 @@
 }
 
 .home .list .card .name-jp {
-    color: white;
-    font-weight: 900;
     font-size: 6rem;
     position: absolute;
     bottom: 0rem;
     left: 1;
     white-space: nowrap;
+}
+
+.home .list .card .region,
+.home .list .card .height,
+.home .list .card .weight {
+    position: absolute;
+    font-size: 1.2rem;
+}
+
+.home .list .card .region {
+    top: 120px;
+    left: -20px;
+    transform: rotate(-0.25turn); 
+}
+
+.home .list .card .height {
+    top: 90px;
+    left: 40px;
+}
+
+.home .list .card .weight {
+    top: 105px;
+    left: 40px;
 }
 
 /* sm */
