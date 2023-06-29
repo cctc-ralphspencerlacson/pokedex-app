@@ -101,19 +101,19 @@
 }
 
 .home .list .card .region {
-    top: 120px;
+    top: 130px;
     left: -20px;
     transform: rotate(-0.25turn); 
 }
 
 .home .list .card .height {
-    top: 90px;
-    left: 40px;
+    top: 100px;
+    left: 80px;
 }
 
 .home .list .card .weight {
-    top: 105px;
-    left: 40px;
+    top: 120px;
+    left: 80px;
 }
 
 /* sm */

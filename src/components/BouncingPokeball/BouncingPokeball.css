@@ -14,7 +14,7 @@
     border: solid #37474f 2px;
   }
 
-.bounce {
+.pokeball.bounce {
     animation-name: bounce;
     animation-timing-function: cubic-bezier(0.28, 0.84, 0.42, 1);
 }

@@ -1,3 +1,8 @@
+
+// Utils
+import { extractRomanNumerals  } from "../utils/StringUtils.js";
+import { romanToInteger  } from "../utils/IntUtils.js";
+
 /**
  * Public API data from PokeAPI
  * ------------------------------------------ */
@@ -46,7 +51,7 @@ export const getPokemonData = async (name) => {
             description: speciesData.data.flavor_text_entries[1].flavor_text,
             color: speciesData.data.color.name,
             generation: speciesData.data.generation.name,
-            region: await getPokemonRegion(speciesData.data.generation.url),
+            region: await getPokemonRegion(speciesData.data.generation.name),
 
             height: pokemonData.data.height,
             weight: pokemonData.data.weight,
@@ -54,12 +59,13 @@ export const getPokemonData = async (name) => {
             types: pokemonData.data.types,
             abilities: pokemonData.data.abilities,
             hasGenderDiff: speciesData.data.has_gender_differences,
+            hasShinyVer: pokemonData?.data?.sprites?.other['official-artwork']?.front_shiny ? true : false,
             artwork: {
                 default: {
                     front: pokemonData?.data?.sprites?.other['official-artwork']?.front_default
                 },
                 shiny: {
-                    shiny: pokemonData?.data?.sprites?.other['official-artwork']?.front_shiny
+                    front: pokemonData?.data?.sprites?.other['official-artwork']?.front_shiny
                 }
             },
             sprites: {
@@ -90,9 +96,11 @@ export const getPokemonData = async (name) => {
     }
 }
 
-export const getPokemonRegion = async (query) => {
+export const getPokemonRegion = async (generation) => {
+    let generationParam = `generation/${romanToInteger(extractRomanNumerals(generation).toUpperCase())}`;
+    
     try {
-        const response = await axios.get(query);
+        const response = await axios.get(baseUrl + generationParam);
         return response.data.main_region.name;
     } catch (error) {
         console.error(error);

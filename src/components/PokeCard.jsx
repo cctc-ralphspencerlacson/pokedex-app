@@ -1,16 +1,18 @@
 import { useEffect, useState } from "react";
 // Component
 import BouncingPokeball from "./BouncingPokeball/BouncingPokeball";
+import CheckboxPokeball from "./CheckboxPokeball/CheckboxPokeball";
 // API
-import { getPokemonData, getPokemonRegion } from "../service/pokeapi.js";
+import { getPokemonData } from "../service/pokeapi.js";
 // Utils
-import { removeHyphenAndCapitalize } from "../utils/StringUtils.js";
+import { removeHyphen, capitalize } from "../utils/StringUtils.js";
 // CSS
 import './PokeCard.css';
 
 const PokeCard = (props) => {
   const { name } = props;
   const [pokeData, setPokeData] = useState(null);
+  const [isShiny, setIsShiny] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const [loading, setLoading] = useState(false);
 
@@ -40,21 +42,23 @@ const PokeCard = (props) => {
   }
 
   const setFlash = () => isVisible && "flash";
+  const setShowShiny = (value) => setIsShiny(value);
   const getBackgroundColor = () => pokeData ? pokeData?.color : 'default';
   const getPokemonHeight = (height) => height + 350;
-  const getPokemonImage = () => {
-    return pokeData?.artwork.default.front;
-  }
+  const getPokemonImage = () => isShiny ? pokeData?.artwork.shiny.front : pokeData?.artwork.default.front;
 
-  console.log(pokeData)
+  console.log(isShiny)
   return (
     <>
     <div key={pokeData?.id} className={`card bg-${getBackgroundColor()} ${setFlash()}`}>
       { !loading ? (
           <>
+            {pokeData?.hasShinyVer && (
+              <CheckboxPokeball showShiny={isShiny} setShowShiny={setShowShiny} />
+            )}
             <p className="id">{`#${pokeData?.id}`}</p>
-            <p className="name-en">{removeHyphenAndCapitalize(name)}</p>
-            <p className="region">{`Region: ${pokeData?.region}`}</p>
+            <p className="name-en">{capitalize(removeHyphen(name))}</p>
+            <p className="region">{`Region: ${capitalize(pokeData?.region)}`}</p>
             <p className="height">{`Height: ${pokeData?.height}`}</p>
             <p className="weight">{`Weight: ${pokeData?.weight}`}</p>
             <img 

@@ -16,8 +16,6 @@ const PokeHome = (props) => {
   const [offset, setOffset] = useState(0);
   const [page, setPage] = useState(0);
 
-  const setSearchQuery = (query) => setQuery(query);
-
   useEffect(() => {
     fetchPokemons();
   }, [offset]);
@@ -56,6 +54,8 @@ const PokeHome = (props) => {
     setOffset(offset + limit);
     setPage(offset/limit);
   };
+
+  const setSearchQuery = (query) => setQuery(query);
   
   return (
     <div className="home">
