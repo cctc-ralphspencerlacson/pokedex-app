@@ -1,8 +1,7 @@
 // CSS
 import './Footer.css';
 
-const Footer = (props) => {
-  const { offset, limit, total, handlePageClick } = props;
+const Footer = ({ offset, limit, total, handlePageClick }) => {
 
   const renderPagination = () => {
     const totalPages = Math.ceil(total / limit);

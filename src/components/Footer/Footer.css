@@ -10,7 +10,7 @@
     justify-content: center;
     align-items: center;
     
-    z-index: 100;
+    z-index: 10;
 }
 
 .footer button {
@@ -21,10 +21,6 @@
     padding: .8rem;
     border: none;
     border-radius: .5rem;
-}
-
-.footer .disabled {
-    background-color: red;
 }
 
 .footer button:first-child,

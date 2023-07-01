@@ -2,8 +2,7 @@ import sparkle from '../../../img/sparkle.png';
 // CSS
 import './ToggleShiny.css';
 
-const ToggleShiny = (props) => {
-  const { showShiny, setShowShiny } = props;
+const ToggleShiny = ({ showShiny, setShowShiny }) => {
 
   return (
     <button className={`btn-transparent fn-toggle-shiny ${showShiny && 'active'}`} onClick={() => setShowShiny(!showShiny)}>

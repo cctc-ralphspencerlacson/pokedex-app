@@ -2,8 +2,7 @@
 import PokeCard from "./PokeCard";
 import './PokeList.css';
 
-const PokeList = (props) => {
-  const { pokemons } = props;
+const PokeList = ({ pokemons }) => {
 
   const handleScroll = (e) => {
     const bottom = e.target.scrollHeight - e.target.scrollTop === e.target.clientHeight;

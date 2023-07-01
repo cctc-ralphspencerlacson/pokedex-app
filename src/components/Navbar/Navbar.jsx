@@ -2,8 +2,7 @@ import { useState } from "react";
 // CSS
 import './Navbar.css';
 
-const Navbar = (props) => {
-  const { setSearchQuery } = props;
+const Navbar = ({ setSearchQuery }) => {
   const [query, setQuery] = useState("");
   
   return(

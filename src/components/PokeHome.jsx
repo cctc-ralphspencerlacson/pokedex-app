@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 // Component
-import Navbar from "./Navbar/Navbar";
-import Footer from "./Footer/Footer";
+import Navbar from "./navbar/Navbar";
+import Footer from "./footer/Footer";
 import PokeList from "./PokeList";
 // API
 import { getPokemonsPaginated } from "../service/pokeapi.js";
@@ -14,7 +14,6 @@ const PokeHome = () => {
   const [loading, setLoading] = useState([]);
   const [offset, setOffset] = useState(0);
   const [limit, setLimit] = useState(0);
-  const [page, setPage] = useState(0);
 
   useEffect(() => {
     setLimit(24)
@@ -34,14 +33,13 @@ const PokeHome = () => {
       
       setLoading(false);
     } catch (error) {
-      console.log("fetchPokemon: err: " + error);
+      console.error("fetchPokemon: err: " + error);
     }
   }
 
   const handlePageClick = (newOffset) => setOffset(newOffset);
   const setSearchQuery = (query) => setQuery(query);
  
-  console.log(pokemons)
   return (
     <div>
     <Navbar 

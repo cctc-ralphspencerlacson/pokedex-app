@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 // Component
 import BouncingPokeball from "./others/BouncingPokeball/BouncingPokeball";
 import ToggleShiny from "./others/ToggleShiny/ToggleShiny";
+import Modal from "./modal/Modal";
 // API
 import { getPokemonData } from "../service/pokeapi.js";
 // Utils
@@ -11,12 +12,13 @@ import Default from '../img/default.png';
 // CSS
 import './PokeCard.css';
 
-const PokeCard = (props) => {
-  const { name } = props;
+const PokeCard = ({ name }) => {
   const [pokeData, setPokeData] = useState(null);
   const [isShiny, setIsShiny] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const [loading, setLoading] = useState(false);
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     fetchPokemonData();
@@ -39,19 +41,32 @@ const PokeCard = (props) => {
         }, 3000);
 
     } catch (error) {
-        console.log("fetchPokemonData: err: " + error);
+        console.error("fetchPokemonData: err: " + error);
     }
   }
 
   const setFlash = () => isVisible && "flash";
   const setShowShiny = (value) => setIsShiny(value);
+
+  const getPokemonImage = () => isShiny ? pokeData?.artwork.shiny.front : pokeData?.artwork.default.front;
   const getBackgroundColor = () => pokeData ? pokeData?.color : 'default';
   const getPokemonHeight = (height) => height + 350;
-  const getPokemonImage = () => isShiny ? pokeData?.artwork.shiny.front : pokeData?.artwork.default.front;
+
+  const handleOpenModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
   
   return (
     <>
-    <div key={pokeData?.id} className={`card bg-${getBackgroundColor()} ${setFlash()}`}>
+    <div 
+      key={pokeData?.id} 
+      className={`card bg-${getBackgroundColor()} ${setFlash()}`}
+      onClick={handleOpenModal}
+    >
       { !loading ? (
           <>
             {pokeData?.hasShinyVer && (
@@ -80,7 +95,12 @@ const PokeCard = (props) => {
       ) : (
         <BouncingPokeball />
       )}
-      </div>
+    </div>
+
+    <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
+        <h2>Modal Content</h2>
+        <p>This is an example of a reusable modal component in React.</p>
+    </Modal>
     </>
   );
 }
