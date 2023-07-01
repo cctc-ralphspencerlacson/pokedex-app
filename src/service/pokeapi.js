@@ -43,12 +43,11 @@ export const getPokemonData = async (name) => {
         const [pokemonData, speciesData] = await Promise.all([pokemonResponse, speciesResponse]);
 
         const data = {
-            id: speciesData.data.id,
+            id: speciesData.data.id, 
             name: {
-                en: pokemonData.data.name,
+                en: speciesData.data?.name,
                 jp: speciesData.data?.names[0]?.name
             },
-            description: speciesData.data.flavor_text_entries[1].flavor_text,
             color: speciesData.data.color.name,
             generation: speciesData.data.generation.name,
             region: await getPokemonRegion(speciesData.data.generation.name),
@@ -105,4 +104,8 @@ export const getPokemonRegion = async (generation) => {
     } catch (error) {
         console.error(error);
     }
+}
+
+export const getPokemonDescription = () => {
+
 }

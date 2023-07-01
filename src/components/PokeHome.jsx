@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 // Component
 import Navbar from "./Navbar/Navbar";
 import Footer from "./Footer/Footer";
@@ -31,64 +31,34 @@ const PokeHome = () => {
       
       const apiData = await getPokemonsPaginated(offset, limit);
       setPokemons(apiData)
-
+      
       setLoading(false);
     } catch (error) {
       console.log("fetchPokemon: err: " + error);
     }
   }
 
-  /**
-   * Go to previous page of pokemon list
-   */
-  const handlePrevPage = () => {
-    if (offset >= limit) {
-      setOffset(offset - limit);
-    }
-  };
-
-  /**
-   * Go to next page of pokemon list
-   */
-  const handleNextPage = () => {
-    setOffset(offset + limit);
-  };
-
-  
-  const handleScroll = (e) => {
-    const bottom = e.target.scrollHeight - e.target.scrollTop === e.target.clientHeight;
-    if (bottom) { 
-      console.log("reached bottom")
-    }
-  }
-
+  const handlePageClick = (newOffset) => setOffset(newOffset);
   const setSearchQuery = (query) => setQuery(query);
-
+ 
   console.log(pokemons)
   return (
     <div>
-      {!loading ? (
-        <>
-        <Navbar 
-          setSearchQuery={setSearchQuery} 
-        />
-
-        <div className="home" onScroll={handleScroll}>
+    <Navbar 
+      setSearchQuery={setSearchQuery} 
+    />
+      {!loading && (
+        <div className="home">
           <PokeList pokemons={pokemons} />
         </div>
-
-        <Footer 
-          offset={offset}
-          limit={limit}
-          hasPrev={offset === 0}
-          hasNext={pokemons.next === null} 
-          handlePrevPage={handlePrevPage} 
-          handleNextPage={handleNextPage}
-        />
-        </>
-      ) : (
-        <p>Loading...</p>
       )}
+
+      <Footer 
+        offset={offset}
+        limit={limit}
+        total={pokemons.count}
+        handlePageClick={handlePageClick}
+      />
     </div>
   );
 }

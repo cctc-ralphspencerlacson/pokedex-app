@@ -11,6 +11,7 @@ html {
 
 body {
   background-color: #292524;
+  overflow: hidden;
 }
 
 .App {
@@ -29,5 +30,5 @@ body {
   --red: #FCA5A5;
   --white: #D4D4D8;
   --yellow: #FDE047;
-  --default: #E2E8F0;
+  --default: white;
 }
