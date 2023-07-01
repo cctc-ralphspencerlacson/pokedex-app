@@ -1,22 +1,23 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 // Component
-import PokeSearch from "./PokeSearch";
+import Navbar from "./Navbar/Navbar";
+import Footer from "./Footer/Footer";
 import PokeList from "./PokeList";
 // API
 import { getPokemonsPaginated } from "../service/pokeapi.js";
 // CSS
 import './PokeHome.css';
-import PokeNav from "./PokeNav";
 
-const PokeHome = (props) => {
-  const { limit } = props;
-  const [query, setQuery] = useState("");
+const PokeHome = () => {
+  const [query, setQuery] = useState(null);
   const [pokemons, setPokemons] = useState([]);
   const [loading, setLoading] = useState([]);
   const [offset, setOffset] = useState(0);
+  const [limit, setLimit] = useState(0);
   const [page, setPage] = useState(0);
 
   useEffect(() => {
+    setLimit(24)
     fetchPokemons();
   }, [offset]);
 
@@ -38,40 +39,53 @@ const PokeHome = (props) => {
   }
 
   /**
-   * Get previous page of pokemon list
+   * Go to previous page of pokemon list
    */
   const handlePrevPage = () => {
     if (offset >= limit) {
       setOffset(offset - limit);
-      setPage(offset/limit);
     }
   };
 
   /**
-   * Get next page of pokemon list
+   * Go to next page of pokemon list
    */
   const handleNextPage = () => {
     setOffset(offset + limit);
-    setPage(offset/limit);
   };
 
-  const setSearchQuery = (query) => setQuery(query);
   
-  return (
-    <div className="home">
-      {!loading ? (
-        <div>
-          <PokeSearch setSearchQuery={setSearchQuery} />
-          <PokeList pokemons={pokemons} />
+  const handleScroll = (e) => {
+    const bottom = e.target.scrollHeight - e.target.scrollTop === e.target.clientHeight;
+    if (bottom) { 
+      console.log("reached bottom")
+    }
+  }
 
-          <PokeNav 
-            offset={offset}
-            limit={limit}
-            hasNext={pokemons.next === null} 
-            handlePrevPage={handlePrevPage} 
-            handleNextPage={handleNextPage}
-          />
+  const setSearchQuery = (query) => setQuery(query);
+
+  console.log(pokemons)
+  return (
+    <div>
+      {!loading ? (
+        <>
+        <Navbar 
+          setSearchQuery={setSearchQuery} 
+        />
+
+        <div className="home" onScroll={handleScroll}>
+          <PokeList pokemons={pokemons} />
         </div>
+
+        <Footer 
+          offset={offset}
+          limit={limit}
+          hasPrev={offset === 0}
+          hasNext={pokemons.next === null} 
+          handlePrevPage={handlePrevPage} 
+          handleNextPage={handleNextPage}
+        />
+        </>
       ) : (
         <p>Loading...</p>
       )}

@@ -1,4 +1,6 @@
 .home {
     background: #ECFEFF;
     padding: 2rem;
+    overflow: scroll;
+    height: 100vh;
 }

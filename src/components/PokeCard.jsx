@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 // Component
-import BouncingPokeball from "./BouncingPokeball/BouncingPokeball";
-import CheckboxPokeball from "./CheckboxPokeball/CheckboxPokeball";
+import BouncingPokeball from "./others/BouncingPokeball/BouncingPokeball";
+import ToggleShiny from "./others/ToggleShiny/ToggleShiny";
 // API
 import { getPokemonData } from "../service/pokeapi.js";
 // Utils
@@ -47,14 +47,13 @@ const PokeCard = (props) => {
   const getPokemonHeight = (height) => height + 350;
   const getPokemonImage = () => isShiny ? pokeData?.artwork.shiny.front : pokeData?.artwork.default.front;
 
-  console.log(isShiny)
   return (
     <>
     <div key={pokeData?.id} className={`card bg-${getBackgroundColor()} ${setFlash()}`}>
       { !loading ? (
           <>
             {pokeData?.hasShinyVer && (
-              <CheckboxPokeball showShiny={isShiny} setShowShiny={setShowShiny} />
+              <ToggleShiny showShiny={isShiny} setShowShiny={setShowShiny} />
             )}
             <p className="id">{`#${pokeData?.id}`}</p>
             <p className="name-en">{capitalize(removeHyphen(name))}</p>

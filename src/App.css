@@ -9,6 +9,10 @@ html {
   font-size: 62.5%;
 }
 
+body {
+  background-color: #292524;
+}
+
 .App {
   text-align: center;
 }
@@ -17,7 +21,7 @@ html {
 :root {
   --black: #47565B;
   --blue: #93C5FD;
-  --brown: #FBBF24;
+  --brown: #B45309;
   --gray:  #71717A;
   --green: #BEF264;
   --pink: #F9A8D4;

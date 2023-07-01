@@ -15,6 +15,12 @@
     transition: background-color 5s ease-out;
   
     overflow: hidden;
+    z-index: 1;
+}
+
+.home .list .card:hover {
+    cursor: pointer;
+    filter: brightness(90%);
 }
 
 .home .list .card.flash{
@@ -114,6 +120,10 @@
 .home .list .card .weight {
     top: 120px;
     left: 80px;
+}
+
+.home .list .card img {
+    animation: fadeIn 2s;
 }
 
 /* sm */
