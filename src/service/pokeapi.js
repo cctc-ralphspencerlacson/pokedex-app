@@ -21,12 +21,41 @@ export const getPokeApi = async (endpoint) => {
     }
 }
 
-export const getPokemonsPaginated = async (offset, limit) => {
-    let parameters = `pokemon-species?offset=${offset}&limit=${limit}`;
-
+export const getPokemonsPaginated = async (query, offset, limit) => {
+    let parameters = "";
+    
     try {
-        const response = await axios.get(baseUrl + parameters);
-        return response.data;
+        // if(query === 'pokemon-species?') {
+            parameters = `${query}?offset=${offset}&limit=${limit}`;
+            const response = await axios.get(baseUrl + parameters);
+
+            const data = {
+                count: response.data.count,
+                results: response.data.results
+            }
+
+            return data;
+        // } else {
+        //     parameters = `${query}`;
+      
+        //     const response = await axios.get(baseUrl + parameters);
+      
+        //     let results = [];
+      
+        //     const startIndex = offset;
+        //     const endIndex = offset + limit;
+      
+        //     if (Array.isArray(response.data.pokemon)) {
+        //       results = response.data.pokemon.slice(startIndex, endIndex);
+        //     }
+      
+        //     const data = {
+        //       count: response.data.pokemon.length,
+        //       results: results
+        //     };
+      
+        //     return data;
+        //   }
     } catch (error) {
         console.error(error);
     }

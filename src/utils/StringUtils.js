@@ -2,7 +2,7 @@
 const romanNumeralRegex = /(i{1,3}|i[vx]|v|i{0,3}x|xl|x{1,3}|x[lc]|l|x{0,3}c|cd|c{1,3}|c[dm]|d|c{0,3}m)/i;
 
 
-export function removeHyphen(text) {
+export function removeHyphen(text = 'pokemon') {
   return text.split('-').join(' ');
 }
 

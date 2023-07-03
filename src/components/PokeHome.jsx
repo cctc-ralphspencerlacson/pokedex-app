@@ -9,14 +9,13 @@ import { getPokemonsPaginated } from "../service/pokeapi.js";
 import './PokeHome.css';
 
 const PokeHome = () => {
-  const [query, setQuery] = useState(null);
+  const [query, setQuery] = useState('pokemon-species?');
   const [pokemons, setPokemons] = useState([]);
   const [loading, setLoading] = useState([]);
   const [offset, setOffset] = useState(0);
-  const [limit, setLimit] = useState(0);
+  const limit = 24;
 
   useEffect(() => {
-    setLimit(24)
     fetchPokemons();
   }, [offset]);
 
@@ -28,7 +27,7 @@ const PokeHome = () => {
     try {
       setLoading(true);
       
-      const apiData = await getPokemonsPaginated(offset, limit);
+      const apiData = await getPokemonsPaginated('pokemon-species?', offset, limit);
       setPokemons(apiData)
       
       setLoading(false);
@@ -39,7 +38,7 @@ const PokeHome = () => {
 
   const handlePageClick = (newOffset) => setOffset(newOffset);
   const setSearchQuery = (query) => setQuery(query);
- 
+
   return (
     <div>
     <Navbar 
