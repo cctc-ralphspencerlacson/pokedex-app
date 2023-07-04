@@ -25,37 +25,38 @@ export const getPokemonsPaginated = async (query, offset, limit) => {
     let parameters = "";
     
     try {
-        // if(query === 'pokemon-species?') {
+        if(query === 'pokemon-species?') {
             parameters = `${query}?offset=${offset}&limit=${limit}`;
+            console.log(`params: ${parameters}`);
             const response = await axios.get(baseUrl + parameters);
-
+            console.log(response.data);
             const data = {
                 count: response.data.count,
                 results: response.data.results
             }
 
             return data;
-        // } else {
-        //     parameters = `${query}`;
+        } else {
+            parameters = `${query}`;
       
-        //     const response = await axios.get(baseUrl + parameters);
+            const response = await axios.get(baseUrl + parameters);
       
-        //     let results = [];
+            let results = [];
       
-        //     const startIndex = offset;
-        //     const endIndex = offset + limit;
+            const startIndex = offset;
+            const endIndex = offset + limit;
       
-        //     if (Array.isArray(response.data.pokemon)) {
-        //       results = response.data.pokemon.slice(startIndex, endIndex);
-        //     }
+            if (Array.isArray(response.data.pokemon)) {
+              results = response.data.pokemon.slice(startIndex, endIndex);
+            }
       
-        //     const data = {
-        //       count: response.data.pokemon.length,
-        //       results: results
-        //     };
+            const data = {
+              count: response.data.pokemon.length,
+              results: results
+            };
       
-        //     return data;
-        //   }
+            return data;
+        }
     } catch (error) {
         console.error(error);
     }

@@ -9,7 +9,7 @@ import { getPokemonsPaginated } from "../service/pokeapi.js";
 import './PokeHome.css';
 
 const PokeHome = () => {
-  const [query, setQuery] = useState('pokemon-species?');
+  const [query, setQuery] = useState('pokemon-species');
   const [pokemons, setPokemons] = useState([]);
   const [loading, setLoading] = useState([]);
   const [offset, setOffset] = useState(0);
@@ -27,7 +27,7 @@ const PokeHome = () => {
     try {
       setLoading(true);
       
-      const apiData = await getPokemonsPaginated('pokemon-species?', offset, limit);
+      const apiData = await getPokemonsPaginated('type/water', offset, limit);
       setPokemons(apiData)
       
       setLoading(false);
