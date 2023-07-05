@@ -63,7 +63,7 @@ const PokeCard = ({ name }) => {
   return (
     <>
     <div 
-      key={pokeData?.id} 
+      key={name} 
       className={`card bg-${getBackgroundColor()} ${setFlash()}`}
       onClick={handleOpenModal}
     >

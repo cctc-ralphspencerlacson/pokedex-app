@@ -10,7 +10,7 @@ const PokeList = ({ pokemons }) => {
       console.log("reached bottom")
     }
   }
-  console.log(pokemons)
+  
   return(
     <div className="list" onScroll={handleScroll}>
       {pokemons.results.map((pokemon) => (

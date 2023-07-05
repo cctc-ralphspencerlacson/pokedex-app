@@ -25,33 +25,26 @@ export const getPokemonsPaginated = async (query, offset, limit) => {
     let parameters = "";
     
     try {
-        if(query === 'pokemon-species?') {
+        if(query === 'pokemon-species') {
             parameters = `${query}?offset=${offset}&limit=${limit}`;
-            console.log(`params: ${parameters}`);
             const response = await axios.get(baseUrl + parameters);
-            console.log(response.data);
+            
             const data = {
-                count: response.data.count,
-                results: response.data.results
+                count: response?.data.count,
+                results: response?.data.results
             }
 
             return data;
         } else {
-            parameters = `${query}`;
-      
+            parameters = `type/${query}`;
+            
             const response = await axios.get(baseUrl + parameters);
       
             let results = [];
-      
-            const startIndex = offset;
-            const endIndex = offset + limit;
-      
-            if (Array.isArray(response.data.pokemon)) {
-              results = response.data.pokemon.slice(startIndex, endIndex);
-            }
+            results = response.data.pokemon.slice(offset, offset + limit);
       
             const data = {
-              count: response.data.pokemon.length,
+              count: response?.data.pokemon.length,
               results: results
             };
       
@@ -60,6 +53,10 @@ export const getPokemonsPaginated = async (query, offset, limit) => {
     } catch (error) {
         console.error(error);
     }
+}
+
+export const getPokemonSearched = (query) => {
+    console.log(query)
 }
 
 export const getPokemonData = async (name) => {
@@ -131,6 +128,17 @@ export const getPokemonRegion = async (generation) => {
     try {
         const response = await axios.get(baseUrl + generationParam);
         return response.data.main_region.name;
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+export const getPokemonTypes = async () => {
+    let typeParam = `type`;
+    
+    try {
+        const response = await axios.get(baseUrl + typeParam);
+        return response.data.results;
     } catch (error) {
         console.error(error);
     }

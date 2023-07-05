@@ -5,6 +5,36 @@
     padding: 1rem 0;
     position: fixed;
     top: 0;
+
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    justify-content: space-around;
+    align-items: center;
     
     z-index: 10;
+}
+
+.navbar .logo {
+    padding: 0 10px;
+    justify-self: start;
+}
+
+.navbar .logo img {
+    height: 6rem;
+    margin: 0 2rem;
+}
+
+.navbar .search input {
+    height: 4rem;
+    padding: 1rem;
+    width: 40rem;
+    font-size: 1.4rem;
+    border-radius: 5px;
+}
+
+
+.navbar .filter {
+    display: flex;
+    justify-content: end;
+    padding: 0 2rem;
 }
