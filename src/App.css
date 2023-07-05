@@ -10,7 +10,7 @@ html {
 }
 
 body {
-  background-color: #292524;
+  background-color: var(--primary);
   overflow: hidden;
 }
 
@@ -18,8 +18,8 @@ body {
   text-align: center;
 }
 
-/* Background Colors */
 :root {
+  /* Background Colors */
   --black: #47565B;
   --blue: #93C5FD;
   --brown: #B45309;
@@ -31,4 +31,10 @@ body {
   --white: #D4D4D8;
   --yellow: #FDE047;
   --default: white;
+
+  --primary: #292524;
+  --secondary: #ECFEFF;
+
+  --accent: #C76958;
+  --accent-75: #c7695875;
 }

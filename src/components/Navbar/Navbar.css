@@ -1,13 +1,13 @@
 .navbar {
-    background-color: #292524;
-    height: 8rem;
+    background-color: var(--primary);
+    height: auto;
     width: 100vw;
     padding: 1rem 0;
     position: fixed;
     top: 0;
 
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: 1fr;
     justify-content: space-around;
     align-items: center;
     
@@ -16,18 +16,19 @@
 
 .navbar .logo {
     padding: 0 10px;
-    justify-self: start;
+    justify-self: center;
 }
 
 .navbar .logo img {
     height: 6rem;
-    margin: 0 2rem;
+    margin: 0 3rem;
 }
 
 .navbar .search input {
     height: 4rem;
     padding: 1rem;
-    width: 40rem;
+    margin: .5rem 0;
+    width: 50%;
     font-size: 1.4rem;
     border-radius: 5px;
 }
@@ -35,6 +36,25 @@
 
 .navbar .filter {
     display: flex;
-    justify-content: end;
-    padding: 0 2rem;
+    justify-content: center;
+    padding: 0 3rem;
+}
+
+/* md */
+@media (min-width: 768px) {
+    .navbar {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .navbar .logo {
+        justify-self: start;
+    }
+
+    .navbar .search input {
+        width: 100%;
+    }
+
+    .navbar .filter {
+        justify-content: end;
+    }
 }

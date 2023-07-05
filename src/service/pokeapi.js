@@ -1,7 +1,7 @@
 
 // Utils
 import { extractRomanNumerals  } from "../utils/StringUtils.js";
-import { romanToInteger  } from "../utils/IntUtils.js";
+import { romanToInteger } from "../utils/IntUtils.js";
 
 /**
  * Public API data from PokeAPI
@@ -138,7 +138,8 @@ export const getPokemonTypes = async () => {
     
     try {
         const response = await axios.get(baseUrl + typeParam);
-        return response.data.results;
+
+        return response.data.results.filter((type) => type.name !== 'unknown');
     } catch (error) {
         console.error(error);
     }

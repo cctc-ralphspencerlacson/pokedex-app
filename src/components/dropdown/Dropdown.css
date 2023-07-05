@@ -5,8 +5,8 @@
 }
 
 .dropdown .header {
-    background-color: #C76958;
-    color: azure;
+    color: #f0ffff;
+    background-color: var(--accent);
     height: 4rem;
     padding: 0 10px;
     display: flex;
@@ -16,15 +16,18 @@
 }
 
 .dropdown .header:hover {
-    background-color: #c7695872;
+    background-color: var(--accent-75);
 }
   
 .dropdown .header .arrow {
     margin-left: auto;
-    border: solid azure;
-    border-width: 0 2px 2px 0;
-    display: inline-block;
     padding: 3px;
+
+    display: inline-block;
+
+    border: solid var(--primary) ;
+    border-width: 0 2px 2px 0;
+
     transform: rotate(45deg);
     transition: transform 0.3s;
 }
@@ -35,7 +38,7 @@
   
 .dropdown .options {
     color: black;
-    background-color: #fff;
+    background-color: var(--secondary);
     height: 20rem;
     width: 100%;
     padding: 0;
@@ -46,22 +49,24 @@
     top: 100%;
     left: 0;
 
-    overflow: scroll;
-    list-style-type: none;
+    border: 1px solid var(--accent) ;
     border-radius: 4px;
+
+    list-style-type: none;
+    overflow: scroll;
     z-index: 1;
 }
   
 .dropdown .option {
-    cursor: pointer;
     padding: 10px;
+    cursor: pointer;
 }
   
 .dropdown .option:hover {
-    background-color: #c7695875;
+    background-color: var(--accent-75);
 }
 
 .dropdown .option.selected {
-    color: azure;
-    background-color: #C76958;
+    color: var(--secondary);
+    background-color: var(--accent);
 }

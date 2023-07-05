@@ -7,8 +7,8 @@ const Footer = ({ offset, limit, total, handlePageClick }) => {
     const totalPages = Math.ceil(total / limit);
     const currentPage = Math.floor(offset / limit) + 1;
 
-    const startPage = Math.max(currentPage - 5, 1);
-    const endPage = Math.min(startPage + 9, totalPages);
+    const startPage = Math.max(currentPage - 2, 1);
+    const endPage = Math.min(startPage + 4, totalPages);
     const pages = [];
   
     for (let i = startPage; i <= endPage; i++) {
@@ -37,7 +37,7 @@ const Footer = ({ offset, limit, total, handlePageClick }) => {
             onClick={() => handlePageClick((startPage - 2) * limit)}
             disabled={offset === (startPage - 2) * limit}
           >
-            ...
+            &lt;
           </button>
         )}
 
@@ -48,7 +48,7 @@ const Footer = ({ offset, limit, total, handlePageClick }) => {
             onClick={() => handlePageClick(endPage * limit)}
             disabled={offset === endPage * limit}
           >
-            ...
+            &gt;
           </button>
         )}
         
