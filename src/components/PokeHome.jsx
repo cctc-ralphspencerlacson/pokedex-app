@@ -19,7 +19,6 @@ const PokeHome = () => {
   const limit = 12;
 
   useEffect(() => {
-    // console.log(search, filter)
     if(!search) {
       fetchPokemons();
     } else {
@@ -49,6 +48,12 @@ const PokeHome = () => {
     } catch (error) {
       console.error("fetchPokemon: err: " + error);
     }
+  }
+  
+  const onFilter = async (option) => {
+    setSearch('');
+    setOffset(0);
+    setFilter(option);
   }
 
   const onSearch = (query) => {
@@ -89,16 +94,11 @@ const PokeHome = () => {
   
   }
 
-  const onPageClick = (newOffset) => {
-    setSearch('');
-    setOffset(newOffset);
-  }
-
   return (
     <div>
       <Navbar 
         onSearch={onSearch}
-        onFilter={(option) => setFilter(option)} 
+        onFilter={onFilter} 
       />
         {!loading && (
           <div className="home">
@@ -111,7 +111,7 @@ const PokeHome = () => {
           limit={limit}
           total={pokemons.count}
           hasSearch={!search}
-          handlePageClick={onPageClick}
+          handlePageClick={(newOffset) =>  setOffset(newOffset)}
         />
     </div>
   );
