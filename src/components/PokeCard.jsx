@@ -22,7 +22,7 @@ const PokeCard = ({ name }) => {
 
   useEffect(() => {
     fetchPokemonData();
-  }, []);
+  }, [name]);
 
   const fetchPokemonData = async () => {
     try {
@@ -46,31 +46,21 @@ const PokeCard = ({ name }) => {
   }
 
   const setFlash = () => isVisible && "flash";
-  const setShowShiny = (value) => setIsShiny(value);
-
   const getPokemonImage = () => isShiny ? pokeData?.artwork.shiny.front : pokeData?.artwork.default.front;
   const getBackgroundColor = () => pokeData ? pokeData?.color : 'default';
   const getPokemonHeight = (height) => height + 350;
-
-  const handleOpenModal = () => {
-    setIsModalOpen(true);
-  };
-
-  const handleCloseModal = () => {
-    setIsModalOpen(false);
-  };
   
   return (
     <>
     <div 
       key={name} 
       className={`card bg-${getBackgroundColor()} ${setFlash()}`}
-      onClick={handleOpenModal}
+      onClick={() => setIsModalOpen(true)}
     >
       { !loading ? (
           <>
             {pokeData?.hasShinyVer && (
-              <ToggleShiny showShiny={isShiny} setShowShiny={setShowShiny} />
+              <ToggleShiny showShiny={isShiny} setShowShiny={(value) => setIsShiny(value)} />
             )}
             <p className="id">{`#${pokeData?.id || 'N/A'}`}</p>
             <p className="name-en">{capitalize(removeHyphen(name))}</p>
@@ -97,7 +87,7 @@ const PokeCard = ({ name }) => {
       )}
     </div>
 
-    <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
+    <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
         <h2>Modal Content</h2>
         <p>This is an example of a reusable modal component in React.</p>
     </Modal>

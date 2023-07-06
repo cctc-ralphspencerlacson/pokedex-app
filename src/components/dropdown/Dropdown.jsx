@@ -15,8 +15,8 @@ const Dropdown = ({ options, onSelect }) => {
     const toggleDropdown = () => setIsOpen(!isOpen);
 
     return (
-        <div className='dropdown'>
-            <div className='header' onClick={toggleDropdown}>
+        <div className='dropdown' onMouseEnter={toggleDropdown} onMouseLeave={toggleDropdown}>
+            <div className='header'>
                 {selectedOption ? capitalize(selectedOption) : 'Filter by Type'}
                  <i className={`arrow ${isOpen ? 'up' : 'down'}`} />
             </div>

@@ -9,7 +9,7 @@ import PokeApiLogo from '../../img/pokeapi.png';
 // CSS
 import './Navbar.css';
 
-const Navbar = ({ setSearchQuery, setFilterQuery }) => {
+const Navbar = ({ onSearch, onFilter }) => {
   const [query, setQuery] = useState("");
   const [options, setOptions] = useState('pokemon-species');
 
@@ -30,7 +30,7 @@ const Navbar = ({ setSearchQuery, setFilterQuery }) => {
 
   const handleQueryChange = (e) => {
     setQuery(e.target.value);
-    setSearchQuery(e.target.value);
+    onSearch(e.target.value);
   }
   
   return(
@@ -50,7 +50,7 @@ const Navbar = ({ setSearchQuery, setFilterQuery }) => {
       </div>
 
       <div className="filter">
-        <Dropdown options={options} onSelect={setFilterQuery}/>
+        <Dropdown options={options} onSelect={onFilter}/>
       </div>
     </div>
   );

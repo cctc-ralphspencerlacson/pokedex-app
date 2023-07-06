@@ -55,8 +55,21 @@ export const getPokemonsPaginated = async (query, offset, limit) => {
     }
 }
 
-export const getPokemonSearched = (query) => {
-    console.log(query)
+export const getPokemonsSearchData = async () => {
+    let parameters = 'pokemon-species?limit=100000&offset=0';
+
+    try {
+        const response = await axios.get(baseUrl + parameters);
+
+        const data = {
+            count: response?.data.count,
+            results: response?.data.results
+        }
+
+        return data;
+    } catch (error) {
+        console.error(error);
+    }
 }
 
 export const getPokemonData = async (name) => {
@@ -123,10 +136,10 @@ export const getPokemonData = async (name) => {
 }
 
 export const getPokemonRegion = async (generation) => {
-    let generationParam = `generation/${romanToInteger(extractRomanNumerals(generation).toUpperCase())}`;
+    let parameters = `generation/${romanToInteger(extractRomanNumerals(generation).toUpperCase())}`;
     
     try {
-        const response = await axios.get(baseUrl + generationParam);
+        const response = await axios.get(baseUrl + parameters);
         return response.data.main_region.name;
     } catch (error) {
         console.error(error);
@@ -134,10 +147,10 @@ export const getPokemonRegion = async (generation) => {
 }
 
 export const getPokemonTypes = async () => {
-    let typeParam = `type`;
+    let parameters = `type`;
     
     try {
-        const response = await axios.get(baseUrl + typeParam);
+        const response = await axios.get(baseUrl + parameters);
 
         return response.data.results.filter((type) => type.name !== 'unknown');
     } catch (error) {
@@ -146,5 +159,5 @@ export const getPokemonTypes = async () => {
 }
 
 export const getPokemonDescription = () => {
-
+    
 }

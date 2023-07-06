@@ -4,24 +4,41 @@ import Navbar from "./navbar/Navbar";
 import Footer from "./footer/Footer";
 import PokeList from "./PokeList";
 // API
-import { getPokemonsPaginated } from "../service/pokeapi.js";
+import { getPokemonsSearchData, getPokemonsPaginated } from "../service/pokeapi.js";
 // CSS
 import './PokeHome.css';
 
 const PokeHome = () => {
-  const [search, setSearch] = useState('');
-  const [filter, setFilter] = useState('pokemon-species');
   const [pokemons, setPokemons] = useState([]);
+  const [filter, setFilter] = useState('pokemon-species');
+  const [search, setSearch] = useState('');
+  const [searchData, setSearchData] = useState([]);
+  const [typingTimeout, setTypingTimeout] = useState(null);
   const [loading, setLoading] = useState([]);
   const [offset, setOffset] = useState(0);
-  const limit = 24;
-
+  const limit = 12;
 
   useEffect(() => {
-    fetchPokemons();
+    // console.log(search, filter)
+    if(!search) {
+      fetchPokemons();
+    } else {
+      onSearch(search);
+    }
+
+    return () => {
+      if (typingTimeout) {
+        clearTimeout(typingTimeout);
+      }
+    };
+
   }, [offset, filter]);
 
   const fetchPokemons = async () => {
+
+    const searchData = await getPokemonsSearchData();
+    setSearchData(searchData);
+
     try {
       setLoading(true);
       
@@ -34,15 +51,54 @@ const PokeHome = () => {
     }
   }
 
-  const handlePageClick = (newOffset) => setOffset(newOffset);
-  const setSearchQuery = (query) => setSearch(query);
-  const setFilterQuery = (option) => setFilter(option);
+  const onSearch = (query) => {
+    // Clear the previous timeout if exists
+    if (typingTimeout) {
+      clearTimeout(typingTimeout);
+    }
+
+    // Set a new timeout to trigger after 1 second of inactivity
+    const newTypingTimeout = setTimeout(() => {
+      // The user has stopped typing, handle the event here
+
+      if(!query){
+        setSearch('');
+        setFilter('pokemon-species');
+        fetchPokemons();
+        return;
+      } 
+    
+      setPokemons([]);
+      setSearch(query);
+
+      const regex = new RegExp(`^${query}`, 'i');
+
+      const filteredData = searchData.results.filter(item => {
+        const itemName = item.name;
+        return regex.test(itemName);
+      });
+
+      setPokemons({
+        count: filteredData.length,
+        results: filteredData
+      });
+
+    }, 1000);
+
+    setTypingTimeout(newTypingTimeout);
+  
+  }
+
+  const onPageClick = (newOffset) => {
+    setSearch('');
+    setOffset(newOffset);
+  }
 
   return (
     <div>
       <Navbar 
-        setSearchQuery={setSearchQuery}
-        setFilterQuery={setFilterQuery} 
+        onSearch={onSearch}
+        onFilter={(option) => setFilter(option)} 
       />
         {!loading && (
           <div className="home">
@@ -54,7 +110,8 @@ const PokeHome = () => {
           offset={offset}
           limit={limit}
           total={pokemons.count}
-          handlePageClick={handlePageClick}
+          hasSearch={!search}
+          handlePageClick={onPageClick}
         />
     </div>
   );
