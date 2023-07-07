@@ -64,10 +64,10 @@
 }
   
 .dropdown .option:hover {
-    background-color: var(--accent-75);
+    background-color: var(--accent-c5);
 }
 
 .dropdown .option.selected {
     color: var(--secondary);
-    background-color: var(--accent);
+    background-color: var(--accent-75);
 }

@@ -45,7 +45,7 @@ const PokeCard = ({ name }) => {
     }
   }
 
-  const setFlash = () => isVisible && "flash";
+  const setFlash = () => isVisible ? 'flash' : '';
   const getPokemonImage = () => isShiny ? pokeData?.artwork.shiny.front : pokeData?.artwork.default.front;
   const getBackgroundColor = () => pokeData ? pokeData?.color : 'default';
   const getPokemonHeight = (height) => height + 350;

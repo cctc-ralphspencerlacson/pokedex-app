@@ -15,3 +15,8 @@ export function extractRomanNumerals(string) {
 
   return romanNumeral;
 }
+
+export function formatRomanNumerals(str) {
+  const words = str.split('-');
+  return `${words[0]} ${words[1].toUpperCase()}`;
+}

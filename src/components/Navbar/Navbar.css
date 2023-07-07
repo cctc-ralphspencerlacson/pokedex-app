@@ -2,7 +2,7 @@
     background-color: var(--primary);
     height: auto;
     width: 100vw;
-    padding: 1rem 0;
+    padding: .5rem 0;
     position: fixed;
     top: 0;
 
@@ -20,12 +20,12 @@
 }
 
 .navbar .logo img {
-    height: 6rem;
+    height: 4rem;
     margin: 0 3rem;
 }
 
 .navbar .search input {
-    height: 4rem;
+    height: 3rem;
     width: 50%;
     min-width: 29rem;
     padding: 1rem;

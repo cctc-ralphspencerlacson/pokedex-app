@@ -23,6 +23,11 @@
     border-radius: .5rem;
 }
 
+
+.footer button:hover {
+    background-color: var(--accent-c5);
+}
+
 .footer button:disabled {
     background-color: var(--accent-75);
 }

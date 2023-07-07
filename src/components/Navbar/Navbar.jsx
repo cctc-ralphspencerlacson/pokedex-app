@@ -52,7 +52,7 @@ const Navbar = ({ selectedOption, onSearch, onTypeFilter, onGenerationFilter }) 
       <div className="search">
         <input 
             type="text"  
-            placeholder="Search by pokedex id or name" 
+            placeholder="Search by pokedex ID or Name" 
             name="query"
             value={query} 
             onChange={handleQueryChange}

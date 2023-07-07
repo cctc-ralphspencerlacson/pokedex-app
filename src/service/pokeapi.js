@@ -1,6 +1,6 @@
 
 // Utils
-import { extractRomanNumerals  } from "../utils/StringUtils.js";
+import { capitalize, removeHyphen, extractRomanNumerals, formatRomanNumerals  } from "../utils/StringUtils.js";
 import { romanToInteger } from "../utils/IntUtils.js";
 
 /**
@@ -167,7 +167,7 @@ export const getPokemonTypes = async () => {
 
         const filteredData = response.data.results.filter((type) => type.name !== 'unknown');
         const transformedData = filteredData.map(({ name }) => ({
-            name: name,
+            name: capitalize(name),
             value: name,
           }));
 
@@ -184,7 +184,7 @@ export const getPokemonGenerations = async () => {
         const response = await axios.get(baseUrl + parameters);
 
         const transformedData = response.data.results.map(({ name }) => ({
-            name: name,
+            name: capitalize(formatRomanNumerals(name)),
             value: romanToInteger(extractRomanNumerals(name)),
           }));
 

@@ -23,7 +23,7 @@ const Dropdown = ({ header, options, selectedOption, onSelect }) => {
                     {options.map(({name, value}) => (
                         <li
                             key={name}
-                            className={`option ${value === selectedOption ? 'selected' : ''}`}
+                            className={`option ${value === selectedOption?.value ? 'selected' : ''}`}
                             onClick={() => handleOptionSelect(value === selectedOption ? '' : {name, value})}
                         >
                         {name}

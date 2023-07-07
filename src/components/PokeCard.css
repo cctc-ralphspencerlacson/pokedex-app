@@ -120,14 +120,17 @@
     transform: rotate(-0.25turn); 
 }
 
+.home .list .card .height,
+.home .list .card .weight {
+    left: 40px;
+}
+
 .home .list .card .height {
     top: 100px;
-    left: 80px;
 }
 
 .home .list .card .weight {
     top: 120px;
-    left: 80px;
 }
 
 .home .list .card img {
