@@ -133,10 +133,6 @@
     top: 120px;
 }
 
-.home .list .card img {
-    animation: fadeIn 2s;
-}
-
 /* sm */
 @media (min-width: 640px) {
     .home .list .card .name-jp {
