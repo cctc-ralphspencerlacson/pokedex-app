@@ -63,11 +63,16 @@
     .navbar .filter {
         justify-content: end;
     }
+}
 
+/* lg */
+@media (min-width: 1024px) {
     .navbar .filter span {
         color: var(--accent);
         font-size: 1.6rem;
         font-weight: bold;
         margin: 0 1rem;
+
+        display: inline-block;
     }
 }

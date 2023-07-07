@@ -128,9 +128,13 @@ const PokeHome = () => {
         onTypeFilter={onTypeFilter}
         onGenerationFilter={onGenerationFilter}
       />
-        {!loading && (
+        {!loading ? (
           <div className="home">
             <PokeList pokemons={pokemons} />
+          </div>
+        ) : (
+          <div className="home-loading">
+            <h1>Loading ...</h1>
           </div>
         )}
 

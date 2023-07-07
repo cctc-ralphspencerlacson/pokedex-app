@@ -60,7 +60,10 @@ const PokeCard = ({ name }) => {
       { !loading ? (
           <>
             {pokeData?.hasShinyVer && (
-              <ToggleShiny showShiny={isShiny} setShowShiny={(value) => setIsShiny(value)} />
+              <ToggleShiny 
+                showShiny={isShiny} 
+                setShowShiny={(value) => setIsShiny(value)} 
+              />
             )}
             <p className="id">{`#${pokeData?.id || 'N/A'}`}</p>
             <p className="name-en">{capitalize(removeHyphen(name))}</p>

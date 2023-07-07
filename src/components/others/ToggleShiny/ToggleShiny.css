@@ -17,16 +17,38 @@ button {
 }
 
 .fn-toggle-shiny img {
-	height: 6rem;
-	height: 6rem;
-	filter: drop-shadow(0px 0px 10px #b4b4b4);
-	transform: rotate(210deg);
+	height: 5rem;
+	width: 5rem;
 }
 
 .fn-toggle-shiny img:hover {
-	filter: drop-shadow(0px 0px 10px #A8A29E);
+	filter: drop-shadow(0px 0px 4px #d7d6d5);
 }
 
 .fn-toggle-shiny.active img {
-	filter: drop-shadow(0px 0px 10px #7C2D12);
+	filter: drop-shadow(0px 0px 10px #e3c340);
+}
+
+.fn-toggle-shiny.active .circling-waves {
+	background-color: #ffffff80;
+	height: 4rem;
+	width: 4rem;
+	position: absolute;
+	top: 5px;
+	right: 5px;
+	border-radius: 50%;
+	opacity: 0;
+	animation: circling-waves 2s linear infinite;
+	transform: translate(-50%, -50%);
+}
+
+@keyframes circling-waves {
+	0% {
+	  transform: scale(1) rotate(0deg);
+	  opacity: 0.8;
+	}
+	100% {
+	  transform: scale(2) rotate(360deg);
+	  opacity: 0;
+	}
 }
