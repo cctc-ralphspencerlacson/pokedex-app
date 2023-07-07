@@ -2,3 +2,28 @@
     background: var(--secondary);
     padding: 0;
 }
+
+.home-loading {
+    height: 100vh;
+    width: 100vw;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateX(-100%);
+    animation: move-left-to-right 4s linear infinite;
+}
+
+
+.home-loading img {
+    height: 8rem;
+    filter: contrast(6%);
+}
+
+@keyframes move-left-to-right {
+    0% {
+      transform: translateX(-100%);
+    }
+    100% {
+      transform: translateX(100%);
+    }
+  }

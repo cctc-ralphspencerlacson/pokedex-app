@@ -5,6 +5,8 @@ import Footer from "./footer/Footer";
 import PokeList from "./PokeList";
 // API
 import { getPokemonsSearchData, getPokemonsPaginated } from "../service/pokeapi.js";
+// Images
+import runningPikachu from '../img/gif/tenor-running-pikachu.gif';
 // CSS
 import './PokeHome.css';
 
@@ -46,11 +48,12 @@ const PokeHome = () => {
 
     try {
       setLoading(true);
-      
+
       const apiData = await getPokemonsPaginated(filter.type, filter.gen, offset, limit);
-      setPokemons(apiData);
-      
-      setLoading(false);
+      setTimeout(function() {
+          setPokemons(apiData);
+          setLoading(false);
+      }, 3500);
     } catch (error) {
       console.error("fetchPokemon: err: " + error);
     }
@@ -134,7 +137,7 @@ const PokeHome = () => {
           </div>
         ) : (
           <div className="home-loading">
-            <h1>Loading ...</h1>
+            <img src={runningPikachu} alt='tenor-rafaelfracasso-15385062' />
           </div>
         )}
 
