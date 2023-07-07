@@ -114,6 +114,7 @@ const PokeHome = () => {
       // The user has stopped typing, handle the event here
 
       if(!query){
+        setSearch('')
         fetchPokemons();
         return;
       } 
