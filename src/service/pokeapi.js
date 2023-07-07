@@ -21,6 +21,26 @@ export const getPokeApi = async (endpoint) => {
     }
 }
 
+export const getPokemonById = async (id) => {
+    let parameters = `pokemon-species/${id}`;
+    
+    try {    
+        const response = await axios.get(baseUrl + parameters);
+            console.log(response)
+        const data = {
+            count: 1,
+            results: [{
+                name: response?.data.name,
+                url: `https://pokeapi.co/api/v2/pokemon-species/${response?.data.id}`
+            }]
+        }
+        
+        return data;
+    } catch (error) {
+        console.error(error);
+    }
+}
+
 export const getPokemonsPaginated = async (typeFilter, regionFilter, offset, limit) => {
     let parameters = "";
     let data = {};
@@ -52,7 +72,7 @@ export const getPokemonsPaginated = async (typeFilter, regionFilter, offset, lim
                 results: results
             };
         } else {
-            parameters = `${'pokemon-species'}?offset=${offset}&limit=${limit}`;
+            parameters = `pokemon-species?offset=${offset}&limit=${limit}`;
 
             const response = await axios.get(baseUrl + parameters);
             

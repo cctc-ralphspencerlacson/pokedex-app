@@ -4,7 +4,7 @@ import Navbar from "./navbar/Navbar";
 import Footer from "./footer/Footer";
 import PokeList from "./PokeList";
 // API
-import { getPokemonsSearchData, getPokemonsPaginated } from "../service/pokeapi.js";
+import { getPokemonsSearchData, getPokemonsPaginated, getPokemonById } from "../service/pokeapi.js";
 // Images
 import runningPikachu from '../img/gif/tenor-running-pikachu.gif';
 // CSS
@@ -58,6 +58,21 @@ const PokeHome = () => {
       console.error("fetchPokemon: err: " + error);
     }
   }
+
+  const fetchPokemonById = async (id) => {
+    try {
+      setLoading(true);
+
+      const apiData = await getPokemonById(id);
+      console.log(apiData);
+      setTimeout(function() {
+          setPokemons(apiData);
+          setLoading(false);
+      }, 3500);
+    } catch (error) {
+      console.error("fetchPokemon: err: " + error);
+    }
+  }
   
   const onTypeFilter = async (option) => {
     setSearch('');
@@ -99,11 +114,14 @@ const PokeHome = () => {
       // The user has stopped typing, handle the event here
 
       if(!query){
-        setSearch('');
         fetchPokemons();
         return;
       } 
-    
+
+      if(!isNaN(query)) {
+        fetchPokemonById(query);
+      }
+
       setPokemons([]);
       setSearch(query);
 
