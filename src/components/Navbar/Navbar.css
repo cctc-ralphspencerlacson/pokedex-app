@@ -26,9 +26,10 @@
 
 .navbar .search input {
     height: 4rem;
+    width: 50%;
+    min-width: 29rem;
     padding: 1rem;
     margin: .5rem 0;
-    width: 50%;
     font-size: 1.4rem;
     border-radius: 5px;
 }
@@ -37,7 +38,12 @@
 .navbar .filter {
     display: flex;
     justify-content: center;
+    align-items: center;
     padding: 0 3rem;
+}
+
+.navbar .filter span {
+    display: none;
 }
 
 /* md */
@@ -56,5 +62,12 @@
 
     .navbar .filter {
         justify-content: end;
+    }
+
+    .navbar .filter span {
+        color: var(--accent);
+        font-size: 1.6rem;
+        font-weight: bold;
+        margin: 0 1rem;
     }
 }

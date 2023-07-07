@@ -1,5 +1,6 @@
 .dropdown {
     width: 14rem;
+    margin: 0 .5rem;
     font-size: 1.4rem;
     position: relative;
 }

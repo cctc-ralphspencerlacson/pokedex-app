@@ -21,35 +21,48 @@ export const getPokeApi = async (endpoint) => {
     }
 }
 
-export const getPokemonsPaginated = async (query, offset, limit) => {
+export const getPokemonsPaginated = async (typeFilter, regionFilter, offset, limit) => {
     let parameters = "";
-    
+    let data = {};
+
     try {
-        if(query === 'pokemon-species') {
-            parameters = `${query}?offset=${offset}&limit=${limit}`;
+        if(typeFilter !== 'pokemon-species') {
+            parameters = `type/${typeFilter}`;
+            
+            const response = await axios.get(baseUrl + parameters);
+    
+            let results = [];
+            results = response.data.pokemon.slice(offset, offset + limit);
+    
+            data = {
+                count: response?.data.pokemon.length,
+                results: results
+            };
+            
+        } else if (regionFilter !== 'pokemon-species') {
+            parameters = `generation/${regionFilter}`;
+            
+            const response = await axios.get(baseUrl + parameters);
+    
+            let results = [];
+            results = response.data.pokemon_species.slice(offset, offset + limit);
+    
+            data = {
+                count: response?.data.pokemon_species.length,
+                results: results
+            };
+        } else {
+            parameters = `${'pokemon-species'}?offset=${offset}&limit=${limit}`;
+
             const response = await axios.get(baseUrl + parameters);
             
-            const data = {
+            data = {
                 count: response?.data.count,
                 results: response?.data.results
             }
-
-            return data;
-        } else {
-            parameters = `type/${query}`;
-            
-            const response = await axios.get(baseUrl + parameters);
-      
-            let results = [];
-            results = response.data.pokemon.slice(offset, offset + limit);
-      
-            const data = {
-              count: response?.data.pokemon.length,
-              results: results
-            };
-      
-            return data;
         }
+    
+        return data;
     } catch (error) {
         console.error(error);
     }
@@ -136,7 +149,7 @@ export const getPokemonData = async (name) => {
 }
 
 export const getPokemonRegion = async (generation) => {
-    let parameters = `generation/${romanToInteger(extractRomanNumerals(generation).toUpperCase())}`;
+    let parameters = `generation/${romanToInteger(extractRomanNumerals(generation))}`;
     
     try {
         const response = await axios.get(baseUrl + parameters);
@@ -152,7 +165,30 @@ export const getPokemonTypes = async () => {
     try {
         const response = await axios.get(baseUrl + parameters);
 
-        return response.data.results.filter((type) => type.name !== 'unknown');
+        const filteredData = response.data.results.filter((type) => type.name !== 'unknown');
+        const transformedData = filteredData.map(({ name }) => ({
+            name: name,
+            value: name,
+          }));
+
+        return transformedData;
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+export const getPokemonGenerations = async () => {
+    let parameters = `generation`;
+
+    try {
+        const response = await axios.get(baseUrl + parameters);
+
+        const transformedData = response.data.results.map(({ name }) => ({
+            name: name,
+            value: romanToInteger(extractRomanNumerals(name)),
+          }));
+
+        return transformedData;
     } catch (error) {
         console.error(error);
     }

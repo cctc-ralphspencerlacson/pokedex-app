@@ -1,6 +1,5 @@
 // Regex
-const romanNumeralRegex = /(i{1,3}|i[vx]|v|i{0,3}x|xl|x{1,3}|x[lc]|l|x{0,3}c|cd|c{1,3}|c[dm]|d|c{0,3}m)/i;
-
+const romanNumeralRegex = /generation-([ivxlcd]+)/i;
 
 export function removeHyphen(text = 'pokemon') {
   return text.split('-').join(' ');
@@ -11,6 +10,8 @@ export function capitalize(text = 'pokemon') {
 }
 
 export function extractRomanNumerals(string) {
-  const matches = string.match(romanNumeralRegex);
-  return matches ? matches[0] : null;
-};
+  const match = string.match(romanNumeralRegex);
+  const romanNumeral = match ? match[1].toUpperCase() : "";
+
+  return romanNumeral;
+}

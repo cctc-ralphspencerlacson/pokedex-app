@@ -2,27 +2,37 @@ import { useEffect, useState } from "react";
 // Components
 import Dropdown from "../dropdown/Dropdown";
 // API
-import { getPokemonTypes } from "../../service/pokeapi.js";
+import { getPokemonTypes, getPokemonGenerations } from "../../service/pokeapi.js";
 // Logo
 import PokeApiLogo from '../../img/pokeapi.png';
 
 // CSS
 import './Navbar.css';
 
-const Navbar = ({ onSearch, onFilter }) => {
+const Navbar = ({ selectedOption, onSearch, onTypeFilter, onGenerationFilter }) => {
   const [query, setQuery] = useState("");
-  const [options, setOptions] = useState('pokemon-species');
-
+  const [typeOptions, setTypeOptions] = useState('');
+  const [genOptions, setGenOption] = useState('');
 
   useEffect(() => {
     fetchPokemonTypes();
+    fetchPokemonGenerations();
   }, []);
 
 
   const fetchPokemonTypes =  async () => {
     try {
       const apiData = await getPokemonTypes();
-      setOptions(apiData);
+      setTypeOptions(apiData);
+    } catch (error) {
+      console.error("fetchPokemon: err: " + error);
+    }
+  }
+
+  const fetchPokemonGenerations = async () => {
+    try {
+      const apiData = await getPokemonGenerations();
+      setGenOption(apiData);
     } catch (error) {
       console.error("fetchPokemon: err: " + error);
     }
@@ -50,7 +60,19 @@ const Navbar = ({ onSearch, onFilter }) => {
       </div>
 
       <div className="filter">
-        <Dropdown options={options} onSelect={onFilter}/>
+        <span>Filter:</span>
+        <Dropdown 
+          header="Generation"
+          options={genOptions} 
+          selectedOption={selectedOption.gen}
+          onSelect={onGenerationFilter} 
+        />
+        <Dropdown 
+          header="Type"
+          options={typeOptions} 
+          selectedOption={selectedOption.type}
+          onSelect={onTypeFilter}
+        />
       </div>
     </div>
   );
