@@ -9,15 +9,17 @@
   justify-content: center;
   align-items: center;
 
-  z-index: 10;
+  z-index: 25;
 }
 
-.modal-content {
+.modal {
+    position: relative;
     background-color: #fff;
-    border-radius: 4px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    max-width: 400px;
+    height: 70rem;
+    width: 110rem;
     padding: 20px;
+    border-radius: 2.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .close {
@@ -25,12 +27,5 @@
   float: right;
   font-size: 28px;
   font-weight: bold;
-  cursor: pointer;
-}
-
-.close:hover,
-.close:focus {
-  color: #000;
-  text-decoration: none;
   cursor: pointer;
 }
