@@ -9,6 +9,26 @@
     gap: 2rem;
 }
 
+.home .not-found {
+    height: 100vh;
+    background-color: var(--secondary);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.home .not-found h1 {
+    margin: 1rem 0;
+}
+
+.home .not-found img {
+    height: 50%;
+    padding: 5px;
+    border: 2px solid var(--black);
+    filter: grayscale(100%);
+}
+
 /* sm */
 @media (min-width: 640px) {
     .home .list  {

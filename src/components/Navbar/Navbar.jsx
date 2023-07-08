@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 // Components
 import Dropdown from "../dropdown/Dropdown";
-// API
+// Service
 import { getPokemonTypes, getPokemonGenerations } from "../../service/pokeapi.js";
 // Logo
 import PokeApiLogo from '../../img/pokeapi.png';
@@ -42,11 +42,13 @@ const Navbar = ({ selectedOption, onSearch, onTypeFilter, onGenerationFilter }) 
     setQuery(e.target.value);
     onSearch(e.target.value);
   }
-  
+
   return(
     <div className="navbar">
       <div className="logo">
-        <img src={PokeApiLogo} alt="pokeapi-logo" />
+        <a href="https://pokeapi.co" target="_blank" rel="noopener noreferrer">
+          <img src={PokeApiLogo} alt="pokeapi-logo" />
+      </a>
       </div>
 
       <div className="search">

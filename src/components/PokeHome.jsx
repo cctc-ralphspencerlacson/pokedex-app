@@ -3,10 +3,10 @@ import { useEffect, useState } from "react";
 import Navbar from "./navbar/Navbar";
 import Footer from "./footer/Footer";
 import PokeList from "./PokeList";
-// API
+// Service
 import { getPokemonsSearchData, getPokemonsPaginated, getPokemonById } from "../service/pokeapi.js";
-// Images
-import runningPikachu from '../img/gif/tenor-running-pikachu.gif';
+// Assets
+import runningPikachu from '../img/pikachu/running-pikachu.gif';
 // CSS
 import './PokeHome.css';
 
@@ -27,6 +27,8 @@ const PokeHome = () => {
   const limit = 12;
 
   useEffect(() => {
+    fetchSearchData();
+
     if(!search) {
       fetchPokemons();
     } else {
@@ -41,11 +43,16 @@ const PokeHome = () => {
 
   }, [offset, filter]);
 
+  const fetchSearchData = async () => {
+    try {
+      const searchData = await getPokemonsSearchData();
+      setSearchData(searchData);
+    } catch (error) {
+      console.error("fetchPokemon: err: " + error);
+    }
+  }
+
   const fetchPokemons = async () => {
-
-    const searchData = await getPokemonsSearchData();
-    setSearchData(searchData);
-
     try {
       setLoading(true);
 
@@ -112,7 +119,7 @@ const PokeHome = () => {
     // Set a new timeout to trigger after 1 second of inactivity
     const newTypingTimeout = setTimeout(() => {
       // The user has stopped typing, handle the event here
-
+      
       if(!query){
         setSearch('')
         fetchPokemons();
@@ -164,7 +171,7 @@ const PokeHome = () => {
           offset={offset}
           limit={limit}
           total={pokemons.count}
-          hasSearch={!search}
+          showPagination={!search || pokemons.count === 0}
           handlePageClick={(newOffset) =>  setOffset(newOffset)}
         />
     </div>

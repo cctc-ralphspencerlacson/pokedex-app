@@ -3,11 +3,11 @@ import { useEffect, useState } from "react";
 import BouncingPokeball from "./others/BouncingPokeball/BouncingPokeball";
 import ToggleShiny from "./others/ToggleShiny/ToggleShiny";
 import Modal from "./modal/Modal";
-// API
+// Service
 import { getPokemonData } from "../service/pokeapi.js";
 // Utils
 import { removeHyphen, capitalize } from "../utils/StringUtils.js";
-// Images
+// Assets
 import Default from '../img/default.png';
 // CSS
 import './PokeCard.css';
@@ -48,7 +48,7 @@ const PokeCard = ({ name }) => {
   const setFlash = () => isVisible ? 'flash' : '';
   const getPokemonImage = () => isShiny ? pokeData?.artwork.shiny.front : pokeData?.artwork.default.front;
   const getBackgroundColor = () => pokeData ? pokeData?.color : 'default';
-  const getPokemonHeight = (height) => height + 350;
+  const getPokemonHeight = (height) => height + 250;
   
   return (
     <>

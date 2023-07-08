@@ -1,5 +1,8 @@
 // Component
 import PokeCard from "./PokeCard";
+// Asset
+import cryingPikachu from "../img/pikachu/crying-pikachu.png"
+// CSS
 import './PokeList.css';
 
 const PokeList = ({ pokemons }) => {
@@ -11,12 +14,21 @@ const PokeList = ({ pokemons }) => {
     }
   }
   
-  return(
-    <div className="list" onScroll={handleScroll}>
-      {pokemons?.results?.map((pokemon) => (
-        <PokeCard name={pokemon.name || pokemon.pokemon.name} />
-      ))}
-    </div>
+  return (
+    <>
+    {pokemons.count !== 0 ? (
+      <div className="list" onScroll={handleScroll}>
+        {pokemons?.results?.map((pokemon) => (
+          <PokeCard name={pokemon.name || pokemon.pokemon.name} />
+        ))}
+      </div>
+    ) : (
+      <div className="not-found">
+        <h1>No Pokemon found</h1>
+        <img src={cryingPikachu} alt="crying-pikachu" />
+      </div>
+    )}
+    </>
   );
 }
 

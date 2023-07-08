@@ -1,7 +1,7 @@
 // CSS
 import './Footer.css';
 
-const Footer = ({ offset, limit, total, hasSearch, handlePageClick }) => {
+const Footer = ({ offset, limit, total, showPagination, handlePageClick }) => {
 
   const renderPagination = () => {
     const totalPages = Math.ceil(total / limit);
@@ -66,7 +66,7 @@ const Footer = ({ offset, limit, total, hasSearch, handlePageClick }) => {
     <div className='footer'>
       <div className="navigation">
         {/* Pagination */}
-        {hasSearch && renderPagination()}
+        {showPagination && renderPagination()}
       </div>
     </div>
   );
