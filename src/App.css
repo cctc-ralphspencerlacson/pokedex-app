@@ -39,3 +39,82 @@ body {
   --accent-c5: #c76958c5;
   --accent-75: #c7695875;
 }
+
+
+.bg-default {
+  background-color: var(--default);
+}
+
+.bg-default p {
+  color: black;
+}
+
+.bg-black {
+  background-color: var(--black);
+}
+.c-black {
+  color: var(--black);
+}
+
+.bg-blue {
+  background-color: var(--blue);
+}
+.c-blue {
+color: var(--blue);
+}
+
+.bg-brown {
+  background-color: var(--brown);
+}
+.c-brown {
+  color: var(--brown);
+}
+
+.bg-gray {
+  background-color: var(--gray);
+}
+.c-gray {
+  color: var(--gray);
+}
+
+.bg-green {
+  background-color: var(--green);
+}
+.c-green {
+  color: var(--green);
+}
+
+.bg-pink {
+  background-color: var(--pink);
+}
+.c-pink {
+  color: var(--pink);
+}
+
+.bg-purple {
+  background-color: var(--purple);
+}
+.c-purple {
+  color: var(--purple);
+}
+
+.bg-red {
+  background-color: var(--red);
+}
+.c-red {
+  color: var(--red);
+}
+
+.bg-white {
+  background-color: var(--white);
+}
+.c-white {
+  color: var(--white);
+}
+
+.bg-yellow {
+  background-color: var(--yellow);
+}
+.c-yellow {
+  color: var(--yellow);
+}

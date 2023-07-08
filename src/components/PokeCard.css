@@ -27,54 +27,6 @@
     filter: brightness(2);
 }
 
-.home .list .card.bg-default {
-    background-color: var(--default);
-}
-
-.home .list .card.bg-default p {
-    color: black;
-}
-
-.home .list .card.bg-black {
-    background-color: var(--black);
-}
-
-.home .list .card.bg-blue {
-    background-color: var(--blue);
-}
-
-.home .list .card.bg-brown {
-    background-color: var(--brown);
-}
-
-.home .list .card.bg-gray {
-    background-color: var(--gray);
-}
-
-.home .list .card.bg-green {
-    background-color: var(--green);
-}
-
-.home .list .card.bg-pink {
-    background-color: var(--pink);
-}
-
-.home .list .card.bg-purple {
-    background-color: var(--purple);
-}
-
-.home .list .card.bg-red {
-    background-color: var(--red);
-}
-
-.home .list .card.bg-white {
-    background-color: var(--white);
-}
-
-.home .list .card.bg-yellow {
-    background-color: var(--yellow);
-}
-
 .home .list .card .id,
 .home .list .card .name-en,
 .home .list .card .name-jp,
@@ -151,4 +103,38 @@
     .home .list .card .name-jp {
         font-size: 6.5rem;
     }
+}
+
+.waves .bottom {
+  height: 18rem;
+  width: 100%;
+  margin: 0;
+  position: absolute;
+  bottom: 0;
+  border-bottom-left-radius: 2.5rem;
+  border-bottom-right-radius: 2.5rem;
+}
+
+.waves .wave1 {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    right: 0;
+    bottom: 18rem;
+    transform: scaleX(-1);
+}
+.waves .wave2 {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    right: 0;
+    bottom: 18rem;
+}
+
+.waves .wave3 {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    right: 0;
+    bottom: 18rem;
 }

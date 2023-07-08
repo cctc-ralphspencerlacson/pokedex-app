@@ -15,16 +15,19 @@
 .modal {
     position: relative;
     background-color: #fff;
-    height: 70rem;
-    width: 110rem;
-    padding: 20px;
+    height: 56rem;
+    width: 90rem;
+    padding: 0;
+    overflow: hidden;
     border-radius: 2.5rem;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .close {
   color: #aaa;
-  float: right;
+  position: absolute;
+  top: 5px;
+  right: 10px;
   font-size: 28px;
   font-weight: bold;
   cursor: pointer;

@@ -13,7 +13,7 @@ const Modal = ({ isOpen, onClose, children }) => {
 
   return (
     <div className="modal-overlay">
-        <div className="modal-content">
+        <div className="modal">
           <span className="close" onClick={handleClose}>
             &times;
           </span>

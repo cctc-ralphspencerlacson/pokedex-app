@@ -8,6 +8,9 @@ import { getPokemonData } from "../service/pokeapi.js";
 // Utils
 import { removeHyphen, capitalize } from "../utils/StringUtils.js";
 // Assets
+import { ReactComponent as Wave1 } from '../img/wave1.svg';
+import { ReactComponent as Wave2 } from '../img/wave2.svg';
+import { ReactComponent as Wave3 } from '../img/wave3.svg';
 import Default from '../img/default.png';
 // CSS
 import './PokeCard.css';
@@ -91,9 +94,16 @@ const PokeCard = ({ name }) => {
     </div>
 
     <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
-        <h2>Modal Content</h2>
-        <p>This is an example of a reusable modal component in React.</p>
+
+    <div className="waves">
+      <Wave1 className={`wave1 c-${getBackgroundColor()}`}/>
+      <Wave2 className={`wave2 c-${getBackgroundColor()}`}/>
+      <Wave3 className={`wave3 c-${getBackgroundColor()}`}/>
+      <div className={`bottom bg-${getBackgroundColor()}`}></div>
+    </div>
+
     </Modal>
+    
     </>
   );
 }
