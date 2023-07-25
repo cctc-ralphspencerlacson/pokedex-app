@@ -214,6 +214,21 @@ export const getPokemonGenerations = async () => {
     }
 }
 
-export const getPokemonDescription = () => {
-    
+export const getPokemonDescription = async (id) => {
+    let parameters = `pokemon-species/${id}`;
+    try {    
+        const response = await axios.get(baseUrl + parameters);
+        const flavors = response.data.flavor_text_entries;
+        
+        flavors.forEach(item => {
+            if(item.language.name === 'en') {
+                console.log(item.language.name, item.flavor_text);
+                return item.flavor_text;
+            }
+        });
+
+        return 'N/A'
+    } catch (error) {
+        console.error(error);
+    }
 }

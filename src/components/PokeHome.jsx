@@ -6,7 +6,7 @@ import PokeList from "./PokeList";
 // Service
 import { getPokemonsSearchData, getPokemonsPaginated, getPokemonById } from "../service/pokeapi.js";
 // Assets
-import runningPikachu from '../img/pikachu/running-pikachu.gif';
+import runningPikachu from '../assets/pikachu/running-pikachu.gif';
 // CSS
 import './PokeHome.css';
 

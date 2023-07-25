@@ -3,15 +3,16 @@ import { useEffect, useState } from "react";
 import BouncingPokeball from "./others/BouncingPokeball/BouncingPokeball";
 import ToggleShiny from "./others/ToggleShiny/ToggleShiny";
 import Modal from "./modal/Modal";
+import PokeDetails from "./PokeDetails";
 // Service
 import { getPokemonData } from "../service/pokeapi.js";
 // Utils
 import { removeHyphen, capitalize } from "../utils/StringUtils.js";
 // Assets
-import { ReactComponent as Wave1 } from '../img/wave1.svg';
-import { ReactComponent as Wave2 } from '../img/wave2.svg';
-import { ReactComponent as Wave3 } from '../img/wave3.svg';
-import Default from '../img/default.png';
+import { ReactComponent as Wave1 } from '../assets/wave1.svg';
+import { ReactComponent as Wave2 } from '../assets/wave2.svg';
+import { ReactComponent as Wave3 } from '../assets/wave3.svg';
+import Default from '../assets/default.png';
 // CSS
 import './PokeCard.css';
 
@@ -95,12 +96,13 @@ const PokeCard = ({ name }) => {
 
     <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
 
-    <div className="waves">
-      <Wave1 className={`wave1 c-${getBackgroundColor()}`}/>
-      <Wave2 className={`wave2 c-${getBackgroundColor()}`}/>
-      <Wave3 className={`wave3 c-${getBackgroundColor()}`}/>
-      <div className={`bottom bg-${getBackgroundColor()}`}></div>
-    </div>
+      <PokeDetails pokeData={pokeData} colorScheme={getBackgroundColor()}/>
+      <div className="waves">
+        <Wave1 className={`wave1 c-${getBackgroundColor()}`}/>
+        <Wave2 className={`wave2 c-${getBackgroundColor()}`}/>
+        <Wave3 className={`wave3 c-${getBackgroundColor()}`}/>
+        <div className={`bottom bg-${getBackgroundColor()}`}></div>
+      </div>
 
     </Modal>
     

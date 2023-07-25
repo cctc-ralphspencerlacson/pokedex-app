@@ -1,4 +1,4 @@
-import sparkle from '../../../img/sparkle.png';
+import sparkle from '../../../assets/sparkle.png';
 // CSS
 import './ToggleShiny.css';
 

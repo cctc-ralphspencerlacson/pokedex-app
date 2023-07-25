@@ -104,37 +104,3 @@
         font-size: 6.5rem;
     }
 }
-
-.waves .bottom {
-  height: 18rem;
-  width: 100%;
-  margin: 0;
-  position: absolute;
-  bottom: 0;
-  border-bottom-left-radius: 2.5rem;
-  border-bottom-right-radius: 2.5rem;
-}
-
-.waves .wave1 {
-    position: absolute;
-    width: 100%;
-    left: 0;
-    right: 0;
-    bottom: 18rem;
-    transform: scaleX(-1);
-}
-.waves .wave2 {
-    position: absolute;
-    width: 100%;
-    left: 0;
-    right: 0;
-    bottom: 18rem;
-}
-
-.waves .wave3 {
-    position: absolute;
-    width: 100%;
-    left: 0;
-    right: 0;
-    bottom: 18rem;
-}

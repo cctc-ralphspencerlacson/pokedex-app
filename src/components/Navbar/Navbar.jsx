@@ -4,7 +4,7 @@ import Dropdown from "../dropdown/Dropdown";
 // Service
 import { getPokemonTypes, getPokemonGenerations } from "../../service/pokeapi.js";
 // Logo
-import PokeApiLogo from '../../img/pokeapi.png';
+import PokeApiLogo from '../../assets/pokeapi.png';
 
 // CSS
 import './Navbar.css';

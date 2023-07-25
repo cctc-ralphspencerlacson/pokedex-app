@@ -1,7 +1,7 @@
 // Component
 import PokeCard from "./PokeCard";
 // Asset
-import cryingPikachu from "../img/pikachu/crying-pikachu.png"
+import cryingPikachu from "../assets/pikachu/crying-pikachu.png"
 // CSS
 import './PokeList.css';
 
