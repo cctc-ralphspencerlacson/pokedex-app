@@ -4,10 +4,10 @@ This is a simple Pokedex React application that fetches Pokemon data from pokeap
 ![alt poke-api](https://github.com/ralphscl/pokedex/blob/main/src/assets/pokeapi.png "Poke Api")
 
 ## Demo
-Insert a link to the live demo of your application here (e.g., Netlify, GitHub Pages).
+Coming soon
 
 ## Screenshots
-Add some screenshots of your application here to give a visual overview.
+Coming soon
 
 ## Features
 Fetches and displays a list of Pokemon from pokeapi.co.
@@ -20,5 +20,16 @@ Responsive and user-friendly design.
 * pokeapi.co (Pokemon API)
 
 ## Installation
-Clone the repository to your local machine.
-Navigate to the project directory.
+1. Clone the repository to your local machine.
+2. Navigate to the project directory.
+```
+cd pokedex
+```
+3. Install the dependencies.
+```
+npm install
+```
+4. Start the development server.
+```
+npm start
+```
