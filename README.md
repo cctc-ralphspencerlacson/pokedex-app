@@ -15,8 +15,9 @@ Displays individual Pokemon data, including an image and additional information.
 Responsive and user-friendly design.
 
 ## Technologies Used
-* React.js
+* [![React][React.js]][React-url]
 * Axios
+* Yarn (Optional)
 * pokeapi.co (Pokemon API)
 
 ## Installation
@@ -25,6 +26,8 @@ Responsive and user-friendly design.
 ```
 cd pokedex
 ```
+
+### Using npm
 3. Install the dependencies.
 ```
 npm install
@@ -34,10 +37,20 @@ npm install
 npm start
 ```
 
-License
+### Using yarn
+3. Install the dependencies.
+```
+yarn install
+```
+4. Start the development server.
+```
+yarn start
+```
+
+## License
 This project is licensed under the MIT License.
 
-Acknowledgments
+## Acknowledgments
 The data and images used in this application are provided by pokeapi.co.
 Thanks to the developers of React, Axios, and other libraries used in this project.
 Thanks to the following assets:
