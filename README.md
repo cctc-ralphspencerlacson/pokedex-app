@@ -33,3 +33,14 @@ npm install
 ```
 npm start
 ```
+
+License
+This project is licensed under the MIT License.
+
+Acknowledgments
+The data and images used in this application are provided by pokeapi.co.
+Thanks to the developers of React, Axios, and other libraries used in this project.
+Thanks to the following assets:
+* [Card Design Inspiration](https://www.behance.net/gallery/104011053/Pokdex "Mauro Wernly")
+* [Modal Design Inspiration](https://dribbble.com/shots/5056538-Pokedex-page "William Krieg")
+* [Pikachu Running Gif](https://tenor.com/view/pikachu-running-run-run-away-gif-13709403 "68000358") 
