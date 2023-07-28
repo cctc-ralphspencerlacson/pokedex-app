@@ -220,14 +220,15 @@ export const getPokemonDescription = async (id) => {
         const response = await axios.get(baseUrl + parameters);
         const flavors = response.data.flavor_text_entries;
         
+        let desc = ""
         flavors.forEach(item => {
+
             if(item.language.name === 'en') {
-                console.log(item.language.name, item.flavor_text);
-                return item.flavor_text;
+                desc = item.flavor_text;
             }
         });
 
-        return 'N/A'
+        return desc || 'N/A';
     } catch (error) {
         console.error(error);
     }
