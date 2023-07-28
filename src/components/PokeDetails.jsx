@@ -24,22 +24,21 @@ const PokeDetails = ({pokeData, colorScheme}) => {
     
   return (
     <>
-    <div className="content">
+    <div className={`content bb-${colorScheme}`}>
       <div className='visual'>
 
       </div>
       <div className='details'>
         <div className='desc'>
-            <h3 className={`bb-${colorScheme}`}>DESCRIPTION</h3>
+            <h3>DESCRIPTION</h3>
             <p>{pokeDesc}</p>
         </div>
         <div className='char'>
-            <h3 className={`bb-${colorScheme}`}>CHARACTERISTICS</h3>
+            <h3>CHARACTERISTICS</h3>
             
         </div>
         <div className='stat'>
-            <h3 className={`bb-${colorScheme}`}>STATISTICS</h3>
-            
+            <h3>STATISTICS</h3>
         </div>
       </div>
     </div>
