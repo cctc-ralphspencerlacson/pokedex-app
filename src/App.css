@@ -55,7 +55,7 @@ body {
 .c-black {
   color: var(--black);
 }
-.bb-black h3 {
+.tu-black h3 {
   text-decoration-color: var(--black);
 }
 
@@ -65,7 +65,7 @@ body {
 .c-blue {
   color: var(--blue);
 }
-.bb-blue h3 {
+.tu-blue h3 {
   text-decoration-color: var(--blue);
 }
 
@@ -75,7 +75,7 @@ body {
 .c-brown {
   color: var(--brown);
 }
-.bb-brown h3 {
+.tu-brown h3 {
   text-decoration-color: var(--brown);
 }
 
@@ -85,7 +85,7 @@ body {
 .c-gray {
   color: var(--gray);
 }
-.bb-gray h3 {
+.tu-gray h3 {
   text-decoration-color: var(--gray);
 }
 
@@ -95,7 +95,7 @@ body {
 .c-green {
   color: var(--green);
 }
-.bb-green h3 {
+.tu-green h3 {
   text-decoration-color: var(--green);
 }
 
@@ -105,7 +105,7 @@ body {
 .c-pink {
   color: var(--pink);
 }
-.bb-pink h3 {
+.tu-pink h3 {
   text-decoration-color: var(--pink);
 }
 
@@ -115,7 +115,7 @@ body {
 .c-purple {
   color: var(--purple);
 }
-.bb-purple h3 {
+.tu-purple h3 {
   text-decoration-color: var(--purple);
 }
 
@@ -125,7 +125,7 @@ body {
 .c-red {
   color: var(--red);
 }
-.bb-red h3 {
+.tu-red h3 {
   text-decoration-color: var(--red);
 }
 
@@ -135,7 +135,7 @@ body {
 .c-white {
   color: var(--white);
 }
-.bb-white h3 {
+.tu-white h3 {
   text-decoration-color: var(--white);
 }
 
@@ -145,7 +145,7 @@ body {
 .c-yellow {
   color: var(--yellow);
 }
-.bb-yellow h3 {
+.tu-yellow h3 {
   text-decoration-color: var(--yellow);
 }
 

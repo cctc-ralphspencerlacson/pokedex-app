@@ -24,3 +24,4 @@ export function getMaxStat(stat) {
 
     return tmpltLabel[stat];
 }
+

@@ -25,7 +25,7 @@ const PokeDetails = ({pokeData, colorScheme}) => {
     console.log(pokeData)
   return (
     <>
-    <div className={`content bb-${colorScheme}`}>
+    <div className={`content tu-${colorScheme}`}>
       <div className='visual'>
 
       </div>
@@ -36,15 +36,32 @@ const PokeDetails = ({pokeData, colorScheme}) => {
         </div>
         <div className='char'>
             <h3>CHARACTERISTICS</h3>
-            
+            <p>Type(s)</p>
+            {pokeData.types.map(({type}) => {
+              return (
+                <p>- {type.name}</p>
+              )
+            })}
+
+            <p>Height</p>
+            <p>{pokeData.height}</p>
+            <p>Weight</p>
+            <p>{pokeData.weight}</p>
+
+            <p>Abilities:</p>
+            {pokeData.abilities.map(({ability}) => {
+              return (
+                <p className={`c-${colorScheme}`}>- {ability.name}</p>
+              )
+            })}
         </div>
         <div className='stat'>
             <h3>STATISTICS</h3>
             <div>
-              {pokeData.stats.map((item) => {
+              {pokeData.stats.map(({stat, base_stat,}) => {
                 return (
                   <p>
-                    {getStatLabel(item.stat.name)} ( {item.base_stat} / {getMaxStat(item.stat.name)} ) {item.base_stat}
+                    {getStatLabel(stat.name)} ( {base_stat} / {getMaxStat(stat.name)} ) {base_stat}
                   </p>
                 )
               })}
