@@ -16,7 +16,6 @@
     align-items: center;
 }
 
-
 .modal .content .details {
     background-color: white;
     margin: 3rem;
@@ -26,8 +25,8 @@
 
     border-radius: 1rem;
     box-shadow: -2px -2px 5px 0px rgba(196,196,196,0.75);
--webkit-box-shadow: -2px -2px 5px 0px rgba(196,196,196,0.75);
--moz-box-shadow: -2px -2px 5px 0px rgba(196,196,196,0.75);
+    -webkit-box-shadow: -2px -2px 5px 0px rgba(196,196,196,0.75);
+    -moz-box-shadow: -2px -2px 5px 0px rgba(196,196,196,0.75);
 }
 
 .modal .content .details h3 {
