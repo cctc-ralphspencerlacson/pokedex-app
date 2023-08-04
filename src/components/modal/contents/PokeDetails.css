@@ -44,3 +44,8 @@
     display: flex;
     justify-content: space-around;
 }
+
+.modal .content .details .stat .container div {
+    display: flex;
+    justify-content: space-between;
+}

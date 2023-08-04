@@ -1,6 +1,6 @@
 import './ProgressBar.css';
 
-const ProgressBar = ({percentage}) => {
+const ProgressBar = ({percentage, color}) => {
 
     const componentStyle = {
         width: `${percentage}%`,
@@ -9,7 +9,7 @@ const ProgressBar = ({percentage}) => {
     return ( 
         <div className="progress">
             <div className="bar">
-                <span className="fill" style={componentStyle}></span>
+                <span className={`fill ${color}`} style={componentStyle}></span>
             </div>
         </div>
      );

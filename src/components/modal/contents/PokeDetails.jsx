@@ -74,9 +74,17 @@ const PokeDetails = ({pokeData, colorScheme}) => {
             <div className='container'>
               {pokeData.stats.map(({stat, base_stat,}) => {
                 return (
-                  <p>
-                    {getStatLabel(stat.name)} <ProgressBar percentage={calculatePercentage(base_stat, getMaxStat(stat.name))} /> {base_stat}
-                  </p>
+                  <div style={{'marginTop':'0.5rem'}}>
+                    <span style={{'width':'10%'}}>
+                      {getStatLabel(stat.name)}
+                    </span> 
+                    
+                    <ProgressBar percentage={calculatePercentage(base_stat, getMaxStat(stat.name))} color={`bg-${colorScheme}`}/>
+
+                    <span style={{'width':'10%', 'textAlign':'center'}}>
+                      {base_stat}
+                    </span>
+                  </div>
                 )
               })}
             </div>
