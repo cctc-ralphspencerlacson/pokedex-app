@@ -14,6 +14,7 @@ const PokeDetails = ({pokeData, colorScheme}) => {
 
   useEffect(() => {
     fetchDescription();
+    // eslint-disable-next-line 
   }, [pokeData]);
 
   const fetchDescription = async () => {
@@ -25,7 +26,7 @@ const PokeDetails = ({pokeData, colorScheme}) => {
       console.error("getPokemonDescription: err: " + error);
     }
   }
-    console.log(pokeData)
+  
   return (
     <>
     <div className={`content tu-${colorScheme}`}>

@@ -11,6 +11,7 @@ const PokeDetails = ({pokeData, colorScheme}) => {
 
   useEffect(() => {
     fetchDescription();
+    // eslint-disable-next-line 
   }, [pokeData]);
 
   const fetchDescription = async () => {

@@ -40,7 +40,7 @@ const PokeHome = () => {
         clearTimeout(typingTimeout);
       }
     };
-
+  // eslint-disable-next-line 
   }, [offset, filter]);
 
   const fetchSearchData = async () => {

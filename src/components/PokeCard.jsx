@@ -26,6 +26,7 @@ const PokeCard = ({ name }) => {
 
   useEffect(() => {
     fetchPokemonData();
+    // eslint-disable-next-line 
   }, [name]);
 
   const fetchPokemonData = async () => {
