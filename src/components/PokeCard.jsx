@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import BouncingPokeball from "./others/BouncingPokeball/BouncingPokeball";
 import ToggleShiny from "./others/ToggleShiny/ToggleShiny";
 import Modal from "./modal/Modal";
-import PokeDetails from "./PokeDetails";
+import PokeDetails from "./modal/contents/PokeDetails";
 // Service
 import { getPokemonData } from "../service/pokeapi.js";
 // Utils

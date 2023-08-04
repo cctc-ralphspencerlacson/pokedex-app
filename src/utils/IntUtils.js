@@ -27,3 +27,7 @@ export function romanToInteger(romanNumeral) {
   
     return result;
   }
+
+  export function calculatePercentage(value, total) {
+    return Math.round((value / total) * 100);
+  };

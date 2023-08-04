@@ -34,14 +34,13 @@
     text-decoration-thickness: 3px;
 }
 
-.modal .content .details .desc h3 {
-    width: 7.7rem;
+.modal .content .details .desc p,
+.modal .content .details .char .container,
+.modal .content .details .stat .container {
+    margin: 1rem;
 }
 
-.modal .content .details .char h3 {
-    width: 10.3rem;
-}
-
-.modal .content .details .stat h3 {
-    width: 6.6rem;
+.modal .content .details .char .container .data {
+    display: flex;
+    justify-content: space-around;
 }

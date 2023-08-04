@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 // Service
-import { getPokemonDescription } from '../service/pokeapi';
+import { getPokemonDescription } from '../../../service/pokeapi';
 // Util
-import { getStatLabel, getMaxStat } from '../utils/OtherUtils';
+import { getStatLabel, getMaxStat } from '../../../utils/OtherUtils';
 // CSS
 import './PokeDetails.css';
 
@@ -36,28 +36,39 @@ const PokeDetails = ({pokeData, colorScheme}) => {
         </div>
         <div className='char'>
             <h3>CHARACTERISTICS</h3>
-            <p>Type(s)</p>
-            {pokeData.types.map(({type}) => {
-              return (
-                <p>- {type.name}</p>
-              )
-            })}
+            <div className='container'>
+              <div className='data'>
+                <div>
+                  <p>Type(s)</p>
+                  {pokeData.types.map(({type}) => {
+                    return (
+                      <p>- {type.name}</p>
+                    )
+                  })}
+                </div>
 
-            <p>Height</p>
-            <p>{pokeData.height}</p>
-            <p>Weight</p>
-            <p>{pokeData.weight}</p>
+                <div>
+                  <p>Height</p>
+                  <p>{pokeData.height}</p>
+                </div>
 
-            <p>Abilities:</p>
-            {pokeData.abilities.map(({ability}) => {
-              return (
-                <p className={`c-${colorScheme}`}>- {ability.name}</p>
-              )
-            })}
+                <div>
+                  <p>Weight</p>
+                  <p>{pokeData.weight}</p>
+                </div>
+              </div>
+
+              <p>Abilities:</p>
+              {pokeData.abilities.map(({ability}) => {
+                return (
+                  <p className={`c-${colorScheme}`}>- {ability.name}</p>
+                )
+              })}
+            </div>
         </div>
         <div className='stat'>
             <h3>STATISTICS</h3>
-            <div>
+            <div className='container'>
               {pokeData.stats.map(({stat, base_stat,}) => {
                 return (
                   <p>
