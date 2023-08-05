@@ -55,8 +55,8 @@ body {
 .c-black {
   color: var(--black);
 }
-.tu-black h3 {
-  text-decoration-color: var(--black);
+.bb-black h2 {
+  border-bottom: 0.4rem solid var(--blue);
 }
 
 .bg-blue {
@@ -65,8 +65,8 @@ body {
 .c-blue {
   color: var(--blue);
 }
-.tu-blue h3 {
-  text-decoration-color: var(--blue);
+.bb-blue h2 {
+  border-bottom: 0.4rem solid var(--blue);
 }
 
 .bg-brown {
@@ -75,8 +75,8 @@ body {
 .c-brown {
   color: var(--brown);
 }
-.tu-brown h3 {
-  text-decoration-color: var(--brown);
+.bb-brown h2 {
+  border-bottom: 0.4rem solid var(--brown);
 }
 
 .bg-gray {
@@ -85,8 +85,8 @@ body {
 .c-gray {
   color: var(--gray);
 }
-.tu-gray h3 {
-  text-decoration-color: var(--gray);
+.bb-gray h2 {
+  border-bottom: 0.4rem solid var(--gray);
 }
 
 .bg-green {
@@ -95,8 +95,8 @@ body {
 .c-green {
   color: var(--green);
 }
-.tu-green h3 {
-  text-decoration-color: var(--green);
+.bb-green h2 {
+  border-bottom: 0.4rem solid var(--green);
 }
 
 .bg-pink {
@@ -105,8 +105,8 @@ body {
 .c-pink {
   color: var(--pink);
 }
-.tu-pink h3 {
-  text-decoration-color: var(--pink);
+.bb-pink h2 {
+  border-bottom: 0.4rem solid var(--pink);
 }
 
 .bg-purple {
@@ -115,8 +115,8 @@ body {
 .c-purple {
   color: var(--purple);
 }
-.tu-purple h3 {
-  text-decoration-color: var(--purple);
+.bb-purple h2 {
+  border-bottom: 0.4rem solid var(--purple);
 }
 
 .bg-red {
@@ -125,8 +125,8 @@ body {
 .c-red {
   color: var(--red);
 }
-.tu-red h3 {
-  text-decoration-color: var(--red);
+.bb-red h2 {
+  border-bottom: 0.4rem solid var(--red);
 }
 
 .bg-white {
@@ -135,8 +135,8 @@ body {
 .c-white {
   color: var(--white);
 }
-.tu-white h3 {
-  text-decoration-color: var(--white);
+.bb-white h2 {
+  border-bottom: 0.4rem solid var(--white);
 }
 
 .bg-yellow {
@@ -145,8 +145,8 @@ body {
 .c-yellow {
   color: var(--yellow);
 }
-.tu-yellow h3 {
-  text-decoration-color: var(--yellow);
+.bb-yellow h2 {
+  border-bottom: 0.4rem solid var(--yellow);
 }
 
 /* Waves */

@@ -5,7 +5,7 @@
 }
 
 .modal .content .visual,
-.modal .content .details {
+.modal .content .information {
     z-index: 15;
 }
 
@@ -16,7 +16,7 @@
     align-items: center;
 }
 
-.modal .content .details {
+.modal .content .information {
     background-color: white;
     margin: 3rem;
     height: 52rem;
@@ -24,28 +24,69 @@
     text-align: left;
 
     border-radius: 1rem;
-    box-shadow: -2px -2px 5px 0px rgba(196,196,196,0.75);
-    -webkit-box-shadow: -2px -2px 5px 0px rgba(196,196,196,0.75);
-    -moz-box-shadow: -2px -2px 5px 0px rgba(196,196,196,0.75);
+    box-shadow: 0 3px 10px rgb(0,0,0,0.2);
 }
 
-.modal .content .details h3 {
-    text-decoration-line: underline;
-    text-decoration-thickness: 3px;
+.modal .content .information h2 {
+    display: inline-block;
+    padding: 0 0 .4rem 0;
+    margin: .4rem 0;
 }
 
-.modal .content .details .desc p,
-.modal .content .details .char .container,
-.modal .content .details .stat .container {
+.modal .content .information .desc p,
+.modal .content .information .char .container,
+.modal .content .information .stat .container {
     margin: 1rem;
 }
 
-.modal .content .details .char .container .data {
-    display: flex;
-    justify-content: space-around;
+.modal .content .information .desc p {
+    font-size: 1.2rem;
 }
 
-.modal .content .details .stat .container div {
+.modal .content .information .desc p a {
+    margin: 1rem 1rem 1rem 1rem;
+    text-decoration: none;
+}
+
+.modal .content .information .char .container .details {
     display: flex;
     justify-content: space-between;
+}
+
+.modal .content .information .char .container .details h3 {
+    text-align: center;
+}
+
+.modal .content .information .char .container .details img {
+    position: relative;
+    height: 8rem;
+    margin: .5rem -0.8rem;
+    border-radius: 50%; 
+    padding: 0;
+}
+
+.modal .content .information .char .container .details p  {
+    display: inline-block;
+    margin: .5rem;
+    width: 8rem;
+    height: 8rem;
+    line-height: 8rem; 
+    text-align: center;
+    font-size: 2.5rem;
+    white-space: nowrap;
+    border-radius: 50%; 
+}
+
+.modal .content .information .char .container .ability p {
+    font-size: 1.2rem;
+}
+
+.modal .content .information .stat .container div {
+    display: flex;
+    justify-content: space-between;
+}
+
+.modal .content .information .stat .container span {
+    font-size: 1rem;
+    font-weight: bold;
 }

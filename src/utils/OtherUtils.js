@@ -7,7 +7,7 @@ export function getStatLabel(label) {
         'special-attack': 'SATK',
         'special-defense': 'SDEF',
         'speed': 'SPD'
-    }
+    };
 
     return tmpltLabel[label];
 }
@@ -20,8 +20,7 @@ export function getMaxStat(stat) {
         'special-attack': 170,
         'special-defense': 155,
         'speed': 200
-    }
+    };
 
     return tmpltLabel[stat];
 }
-

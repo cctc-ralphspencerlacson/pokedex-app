@@ -26,7 +26,7 @@ const PokeDetails = ({pokeData, colorScheme}) => {
     console.log(pokeData)
   return (
     <>
-    <div className={`content tu-${colorScheme}`}>
+    <div className={`content bb-${colorScheme}`}>
       <div className='visual'>
 
       </div>
