@@ -1,6 +1,6 @@
 
 // Utils
-import { capitalize, removeHyphen, extractRomanNumerals, formatRomanNumerals  } from "../utils/StringUtils.js";
+import { capitalize, extractRomanNumerals, formatRomanNumerals  } from "../utils/StringUtils.js";
 import { romanToInteger } from "../utils/IntUtils.js";
 
 /**
@@ -115,12 +115,15 @@ export const getPokemonData = async (name) => {
         
         const [pokemonData, speciesData] = await Promise.all([pokemonResponse, speciesResponse]);
 
+        const pokemonDesc = await getPokemonDescription(speciesData.data.id);
+
         const data = {
             id: speciesData.data.id, 
             name: {
                 en: speciesData.data?.name,
                 jp: speciesData.data?.names[0]?.name
             },
+            pokedex_entry: pokemonDesc,
             color: speciesData.data.color.name,
             generation: speciesData.data.generation.name,
             region: await getPokemonRegion(speciesData.data.generation.name),

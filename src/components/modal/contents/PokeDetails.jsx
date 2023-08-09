@@ -1,6 +1,3 @@
-import { useEffect, useState } from 'react';
-// Service
-import { getPokemonDescription } from '../../../service/pokeapi';
 // Util
 import { calculatePercentage } from '../../../utils/IntUtils';
 import { getStatLabel, getMaxStat } from '../../../utils/OtherUtils';
@@ -11,22 +8,6 @@ import './PokeDetails.css';
 import { capitalize } from '../../../utils/StringUtils';
 
 const PokeDetails = ({ pokeData, colorScheme }) => {
-  const [pokeDesc, setPokeDesc] = useState('');
-
-  useEffect(() => {
-    fetchDescription();
-    // eslint-disable-next-line 
-  }, [pokeData]);
-
-  const fetchDescription = async () => {
-    try {
-      const apiData = await getPokemonDescription(pokeData.id);
-      setPokeDesc(apiData);
-
-    } catch (error) {
-      console.error("getPokemonDescription: err: " + error);
-    }
-  }
   
   return (
     <>
@@ -38,7 +19,7 @@ const PokeDetails = ({ pokeData, colorScheme }) => {
           <div className='desc'>
             <h2>DESCRIPTION</h2>
             <p>
-              {pokeDesc}
+              {pokeData.pokedex_entry}
               <a 
                 className={`c-${colorScheme}`} 
                 href={`https://www.pokemon.com/us/pokedex/${pokeData.name.en}`} 

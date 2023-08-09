@@ -35,7 +35,7 @@ const PokeCard = ({ name }) => {
 
         const apiData = await getPokemonData(name);
         setPokeData(apiData);
-
+console.log(apiData);
         setTimeout(function() {
           setLoading(false);
 
