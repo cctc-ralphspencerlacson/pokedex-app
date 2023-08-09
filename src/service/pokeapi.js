@@ -231,3 +231,21 @@ export const getPokemonDescription = async (id) => {
         console.error(error);
     }
 }
+
+export const getPokemonAbilityDescription = async (ability) => {
+    let parameters = `ability/${ability}`;
+    try {    
+        const response = await axios.get(baseUrl + parameters);
+        
+        let desc = ""
+        response.data.flavor_text_entries.forEach(item => {
+            if(item.language.name === 'en') {
+                desc = item.flavor_text;
+            }
+        });
+
+        return desc || 'N/A';
+    } catch (error) {
+        console.error(error);
+    }
+}
