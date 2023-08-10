@@ -5,7 +5,7 @@ import { getStatLabel, getMaxStat } from '../../../utils/OtherUtils';
 import ProgressBar from '../../others/ProgressBar/ProgressBar';
 // CSS
 import './PokeDetails.css';
-import { capitalize } from '../../../utils/StringUtils';
+import { capitalize, extractRomanNumerals } from '../../../utils/StringUtils';
 
 const PokeDetails = ({ pokeData, colorScheme }) => {
   
@@ -76,6 +76,11 @@ function PokeChar({data, colorScheme}) {
               <span className={`c-${colorScheme}`}>{capitalize(ability.name)}</span>
             </p>;
           })}
+        </div>
+
+        <div className='others'>
+          <p>Region: <span>{capitalize(data.region)}</span></p>
+          <p>Generation: <span>{extractRomanNumerals(data.generation)}</span></p>
         </div>
       </div>
     </div>

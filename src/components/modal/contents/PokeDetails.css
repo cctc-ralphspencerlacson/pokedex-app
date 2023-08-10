@@ -107,6 +107,14 @@
     font-size: 1.2rem;
 }
 
+.modal .content .information .char .container .others {
+    margin-top: .6rem;
+}
+
+.modal .content .information .char .container .others p {
+    font-size: 1.2rem;
+}
+
 .modal .content .information .stat .container div {
     display: flex;
     justify-content: space-between;
