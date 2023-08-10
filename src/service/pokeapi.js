@@ -116,6 +116,7 @@ export const getPokemonData = async (name) => {
         const [pokemonData, speciesData] = await Promise.all([pokemonResponse, speciesResponse]);
 
         const pokemonDesc = await getPokemonDescription(speciesData.data.id);
+        
 
         const data = {
             id: speciesData.data.id, 

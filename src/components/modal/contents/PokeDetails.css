@@ -11,10 +11,36 @@
 
 .modal .content .visual {
     height: 58rem;
-    display: flex;
     justify-content: center;
     align-items: center;
 }
+
+.modal .content .visual p.id {
+    font-size: 3rem;
+    font-weight: bolder;
+    position: absolute;
+    top: 2rem;
+    left: 2rem;
+}
+
+
+.modal .content .visual img {
+    height: 40rem;
+    margin: 4rem 0 0 0;
+    cursor: pointer;
+}
+
+.modal .content .visual p.name-en {
+    color: white;
+    font-size: 6rem;
+    font-weight: bold;
+} 
+
+.modal .content .visual p.name-jp {
+    color: white;
+    font-size: 3rem;
+    font-weight: bold;
+} 
 
 .modal .content .information {
     background-color: white;

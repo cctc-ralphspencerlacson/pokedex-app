@@ -13,7 +13,14 @@ const PokeDetails = ({ pokeData, colorScheme }) => {
     <>
       <div className={`content bb-${colorScheme}`}>
         <div className='visual'>
-
+          <p className={`id c-${colorScheme}`}>
+            #{pokeData.id < 10 ? `00${pokeData.id}` : pokeData.id < 100 ? `0${pokeData.id}` : pokeData.id}
+          </p>
+          <div>
+            <img src={pokeData.artwork.default.front} alt={`${pokeData.name.en}-official-artwork`} />
+          </div>
+          <p className='name-en'>{capitalize(pokeData.name.en)}</p>
+          <p className='name-jp'>{pokeData.name.jp}</p>
         </div>
         <div className='information'>
           <div className='desc'>
@@ -29,7 +36,7 @@ const PokeDetails = ({ pokeData, colorScheme }) => {
               </a>
             </p>
           </div>
-          <PokeChar pokeData={pokeData} colorScheme={colorScheme} />
+          <PokeChar data={pokeData} colorScheme={colorScheme} />
           <PokeStats stats={pokeData.stats} colorScheme={colorScheme} />
         </div>
       </div>
@@ -37,7 +44,7 @@ const PokeDetails = ({ pokeData, colorScheme }) => {
   );
 };
 
-function PokeChar({pokeData, colorScheme}) {
+function PokeChar({data, colorScheme}) {
   return (
     <div className='char'>
       <h2>CHARACTERISTICS</h2>
@@ -45,26 +52,29 @@ function PokeChar({pokeData, colorScheme}) {
         <div className='details'>
           <div className='type'>
             <h3>Type(s):</h3>
-            {pokeData.types.map(({
+            {data.types.map(({
               type
             }) => { return <img src={require(`../../../assets/poke-types/${type.name}.ico`)} alt={type.name}/>; })}
           </div>
 
           <div className='height'>
             <h3>Height:</h3>
-            <p>{Math.round(pokeData.height * 0.328084)} ft</p>
+            <p>{Math.round(data.height * 0.328084)} ft</p>
           </div>
 
           <div className='weight'>
             <h3>Weight:</h3>
-            <p>{Math.round(pokeData.weight* 0.220462262)} lbs</p>
+            <p>{Math.round(data.weight* 0.220462262)} lbs</p>
           </div>
         </div>
 
         <div className='ability'>
           <h3>Abilities:</h3>
-          {pokeData.abilities.map(({ ability }) => {
-            return <p className={`c-${colorScheme}`}>- {capitalize(ability.name)}</p>;
+          {data.abilities.map(({ ability, slot }) => {
+            return <p>
+              <span>Slot {slot}: </span>
+              <span className={`c-${colorScheme}`}>{capitalize(ability.name)}</span>
+            </p>;
           })}
         </div>
       </div>
