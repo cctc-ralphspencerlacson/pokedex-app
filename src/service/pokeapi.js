@@ -117,7 +117,7 @@ export const getPokemonData = async (name) => {
 
         const pokemonDesc = await getPokemonDescription(speciesData.data.id);
         
-
+        console.log()
         const data = {
             id: speciesData.data.id, 
             name: {
@@ -128,6 +128,7 @@ export const getPokemonData = async (name) => {
             color: speciesData.data.color.name,
             generation: speciesData.data.generation.name,
             region: await getPokemonRegion(speciesData.data.generation.name),
+            evolution: await getPokemonEvolutionChain(speciesData.data.evolution_chain.url),
 
             height: pokemonData.data.height,
             weight: pokemonData.data.weight,
@@ -165,7 +166,7 @@ export const getPokemonData = async (name) => {
 
             held_items: pokemonData.data.held_items,
         }
-
+console.log(data)
         return data;
     } catch (error) {
         console.error(error);
@@ -236,20 +237,28 @@ export const getPokemonDescription = async (id) => {
     }
 }
 
-export const getPokemonAbilityDescription = async (ability) => {
-    let parameters = `ability/${ability}`;
-    try {    
-        const response = await axios.get(baseUrl + parameters);
-        
-        let desc = ""
-        response.data.flavor_text_entries.forEach(item => {
-            if(item.language.name === 'en') {
-                desc = item.flavor_text;
-            }
-        });
+export const getPokemonEvolutionChain = async (chainUrl) => {
+    try {
+        const response = await axios.get(chainUrl);        
 
-        return desc || 'N/A';
-    } catch (error) {
-        console.error(error);
-    }
+        const speciesNames = [];
+        const traverseChain = async (details) => {
+            if (details.species) {
+                
+                speciesNames.push({
+                    name: details.species.name,
+                });
+            }
+
+            if(details.evolves_to.length > 0) {
+                traverseChain(details.evolves_to[0]);
+            }
+
+            return speciesNames;
+        }
+
+        return traverseChain(response.data.chain);
+      } catch (error) {
+        console.error('Error:', error.message);
+      }
 }
