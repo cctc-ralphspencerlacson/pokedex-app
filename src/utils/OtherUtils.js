@@ -1,5 +1,11 @@
+/**
+ * Retrieves the abbreviated label corresponding to a given full label.
+ *
+ * @param {string} label - The full label of a stat (e.g., 'hp', 'attack').
+ * @returns {string} The abbreviated label corresponding to the full label.
+ */
 export function getStatLabel(label) {
-
+    // A mapping of stat labels to their abbreviated forms.
     const tmpltLabel = {
         'hp': 'HP',
         'attack': 'ATK',
@@ -12,7 +18,14 @@ export function getStatLabel(label) {
     return tmpltLabel[label];
 }
 
-export function getMaxStat(stat) {
+/**
+ * Retrieves the maximum value of a specific stat based on its label.
+ *
+ * @param {string} stat - The label of the stat for which the maximum value is needed.
+ * @returns {number} The maximum value corresponding to the provided stat label.
+ */
+export function getMaxStat(label) {
+    // A mapping of stat labels to their maximum values.
     const tmpltLabel = {
         'hp': 255,
         'attack': 165,
@@ -22,5 +35,5 @@ export function getMaxStat(stat) {
         'speed': 200
     };
 
-    return tmpltLabel[stat];
+    return tmpltLabel[label];
 }

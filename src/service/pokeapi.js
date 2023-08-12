@@ -11,16 +11,6 @@ import axios from "axios";
 
 const baseUrl = "https://pokeapi.co/api/v2/"
 
-export const getPokeApi = async (endpoint) => {
-
-    try {
-        const response = await axios.get(endpoint);
-        return response.data;
-    } catch (error) {
-        console.error(error);
-    }
-}
-
 export const getPokemonById = async (id) => {
     let parameters = `pokemon-species/${id}`;
     
