@@ -26,7 +26,6 @@ export const getPokemonById = async (id) => {
     
     try {    
         const response = await axios.get(baseUrl + parameters);
-            console.log(response)
         const data = {
             count: 1,
             results: [{
@@ -106,18 +105,14 @@ export const getPokemonsSearchData = async () => {
 }
 
 export const getPokemonData = async (name) => {
-    let pokemonParam = `pokemon/${name}`;
-    let speciesParam = `pokemon-species/${name}`;
-
     try {
-        const pokemonResponse = await axios.get(baseUrl + pokemonParam);
-        const speciesResponse = await axios.get(baseUrl + speciesParam);
+        const pokemonResponse = await axios.get(baseUrl + `pokemon/${name}`);
+        const speciesResponse = await axios.get(baseUrl + `pokemon-species/${name}`);
         
         const [pokemonData, speciesData] = await Promise.all([pokemonResponse, speciesResponse]);
 
         const pokemonDesc = await getPokemonDescription(speciesData.data.id);
         
-        console.log()
         const data = {
             id: speciesData.data.id, 
             name: {
@@ -166,7 +161,7 @@ export const getPokemonData = async (name) => {
 
             held_items: pokemonData.data.held_items,
         }
-console.log(data)
+
         return data;
     } catch (error) {
         console.error(error);
@@ -244,9 +239,43 @@ export const getPokemonEvolutionChain = async (chainUrl) => {
         const speciesNames = [];
         const traverseChain = async (details) => {
             if (details.species) {
-                
+
+                const pokemonResponse = await axios.get(baseUrl + `pokemon/${details.species.name}`);
+                const speciesResponse = await axios.get(baseUrl + `pokemon-species/${details.species.name}`);
+    
                 speciesNames.push({
-                    name: details.species.name,
+                    name:{
+                        en: speciesResponse.data?.name,
+                        jp: speciesResponse.data?.names[0]?.name
+                    },
+                    types: pokemonResponse.data.types,
+                    hasShinyVer: pokemonResponse?.data?.sprites?.other['official-artwork']?.front_shiny ? true : false,
+                    artwork: {
+                        default: {
+                            front: pokemonResponse?.data?.sprites?.other['official-artwork']?.front_default
+                        },
+                        shiny: {
+                            front: pokemonResponse?.data?.sprites?.other['official-artwork']?.front_shiny
+                        }
+                    },
+                    sprites: {
+                        default: {
+                            front: pokemonResponse.data.sprites.front_default,
+                            back: pokemonResponse.data.sprites.back_default
+                        },
+                        default_shiny: {
+                            front: pokemonResponse.data.sprites?.front_shiny,
+                            back: pokemonResponse.data.sprites?.back_shiny
+                        },
+                        female: {
+                            front: pokemonResponse.data.sprites?.front_female,
+                            back: pokemonResponse.data.sprites?.back_female
+                        },
+                        female_shiny: {
+                            front: pokemonResponse.data.sprites?.front_shiny_female,
+                            back: pokemonResponse.data.sprites?.back_shiny_female
+                        }
+                    },
                 });
             }
 

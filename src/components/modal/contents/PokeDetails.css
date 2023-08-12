@@ -73,13 +73,27 @@ body:-webkit-scrollbar {
     margin: 1rem;
 }
 
-.modal .content .information .desc p {
+/* Description */
+.modal .content .information .desc p,
+.modal .content .information .desc p a {
     font-size: 1.2rem;
 }
 
+.modal .content .information .desc p {
+    position: relative;
+}
+
 .modal .content .information .desc p a {
-    margin: 1rem 1rem 1rem 1rem;
+    position: absolute;
+    bottom: -2rem;
+    right: 6rem;
     text-decoration: none;
+    font-weight: bold;
+}
+
+/* Characteristic */
+.modal .content .information .char .container {
+    position: relative;
 }
 
 .modal .content .information .char .container .details {
@@ -92,11 +106,10 @@ body:-webkit-scrollbar {
 }
 
 .modal .content .information .char .container .details img {
-    position: relative;
+    padding: 0;
     height: 6rem;
     margin: .5rem -0.8rem;
     border-radius: 50%; 
-    padding: 0;
 }
 
 .modal .content .information .char .container .details p  {
@@ -115,6 +128,26 @@ body:-webkit-scrollbar {
     font-size: 1.2rem;
 }
 
+.modal .content .information .char .container .evolution {
+    position: absolute;
+    right: 0rem;
+    top: 10rem;
+}
+
+.modal .content .information .char .container .evolution .wrapper {
+    display: flex;
+}
+
+.modal .content .information .char .container .evolution .wrapper img {
+    background-color: white;
+    padding: 1rem;
+    height: 10rem;
+    margin: .5rem -0.8rem;
+    border-radius: 50%; 
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+
 .modal .content .information .char .container .others {
     margin-top: .6rem;
 }
@@ -123,6 +156,10 @@ body:-webkit-scrollbar {
     font-size: 1.2rem;
 }
 
+/* Statistics */
+.modal .content .information .stat {
+    margin-top: 4rem;
+}
 .modal .content .information .stat .container div {
     display: flex;
     justify-content: space-between;

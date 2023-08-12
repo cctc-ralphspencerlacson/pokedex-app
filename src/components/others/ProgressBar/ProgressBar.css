@@ -13,7 +13,6 @@
 .fill {
     display: block;
     height: 8px;
-    background-color: #659cef;
     border-radius: 25px;
     
     transition: width 500ms ease-in-out;

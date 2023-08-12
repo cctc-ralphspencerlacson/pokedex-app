@@ -27,7 +27,7 @@ const PokeDetails = ({ pokeData, colorScheme }) => {
             <h2>DESCRIPTION</h2>
             <p>
               {pokeData.pokedex_entry}
-              <a 
+            <a 
                 className={`c-${colorScheme}`} 
                 href={`https://www.pokemon.com/us/pokedex/${pokeData.name.en}`} 
                 target='_blank' 
@@ -52,9 +52,9 @@ function PokeChar({data, colorScheme}) {
         <div className='details'>
           <div className='type'>
             <h3>Type(s):</h3>
-            {data.types.map(({
-              type
-            }) => { return <img src={require(`../../../assets/poke-types/${type.name}.ico`)} alt={type.name}/>; })}
+            {data.types.map(({ type }) => { 
+              return <img key={type.name} src={require(`../../../assets/poke-types/${type.name}.ico`)} alt={type.name}/>; 
+            })}
           </div>
 
           <div className='height'>
@@ -71,11 +71,30 @@ function PokeChar({data, colorScheme}) {
         <div className='ability'>
           <h3>Abilities:</h3>
           {data.abilities.map(({ ability, slot }) => {
-            return <p>
+            return <p key={ability.name}>
               <span>Slot {slot}: </span>
-              <span className={`c-${colorScheme}`}>{capitalize(ability.name)}</span>
+              <span className={`c-${colorScheme}`}>
+                {capitalize(ability.name)}
+              </span>
             </p>;
           })}
+        </div>
+
+        <div className='evolution'>
+          {data?.evolution.length > 1 &&
+            <>
+              <h3>Evolution:</h3>
+              <div className='wrapper'>
+                {data?.evolution.map(( item ) => {
+                  return data.name.en !== item.name.en && 
+                    <img key={item.name.en} 
+                      src={item.artwork.default.front}
+                      alt={`evolution-${item.name}`}
+                    />; 
+                })}
+              </div>
+            </>
+          }
         </div>
 
         <div className='others'>
@@ -94,11 +113,11 @@ function PokeStats({stats, colorScheme}) {
       <div className='container'>
         {stats.map(({ stat, base_stat }) => {
           return (
-            <div style={{ 'marginTop': '0.5rem' }}>
+            <div key={stat.name} style={{ 'marginTop': '0.5rem' }}>
               <span style={{ 'width': '10%' }}>
                 {getStatLabel(stat.name)}
               </span>
-
+              
               <ProgressBar percentage={calculatePercentage(base_stat, getMaxStat(stat.name))} color={`bg-${colorScheme}`} />
 
               <span style={{ 'width': '10%', 'textAlign': 'center' }}>

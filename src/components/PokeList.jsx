@@ -19,7 +19,7 @@ const PokeList = ({ pokemons }) => {
     {pokemons.count !== 0 ? (
       <div className="list" onScroll={handleScroll}>
         {pokemons?.results?.map((pokemon) => (
-          <PokeCard name={pokemon.name || pokemon.pokemon.name} />
+          <PokeCard key={pokemon.name} name={pokemon.name || pokemon.pokemon.name} />
         ))}
       </div>
     ) : (

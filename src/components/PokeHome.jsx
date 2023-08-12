@@ -71,7 +71,7 @@ const PokeHome = () => {
       setLoading(true);
 
       const apiData = await getPokemonById(id);
-      console.log(apiData);
+      
       setTimeout(function() {
           setPokemons(apiData);
           setLoading(false);
