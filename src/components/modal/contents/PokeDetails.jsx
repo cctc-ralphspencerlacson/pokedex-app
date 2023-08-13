@@ -3,10 +3,19 @@ import { calculatePercentage } from '../../../utils/IntUtils';
 import { getStatLabel, getMaxStat } from '../../../utils/OtherUtils';
 // Components
 import ProgressBar from '../../others/ProgressBar/ProgressBar';
+// Utilities
+import { capitalize, extractRomanNumerals } from '../../../utils/StringUtils';
 // CSS
 import './PokeDetails.css';
-import { capitalize, extractRomanNumerals } from '../../../utils/StringUtils';
 
+/**
+ * PokeDetails component for displaying detailed information about a Pokemon.
+ *
+ * @param {Object} props - Component properties.
+ * @param {Object} props.pokeData - Data containing information about the Pokemon.
+ * @param {string} props.colorScheme - The color scheme to be applied.
+ * @returns {JSX.Element} The PokeDetails component.
+ */
 const PokeDetails = ({ pokeData, colorScheme }) => {
   
   return (

@@ -7,6 +7,7 @@ import './PokeList.css';
 
 const PokeList = ({ pokemons }) => {
 
+  // Not in use
   const handleScroll = (e) => {
     const bottom = e.target.scrollHeight - e.target.scrollTop === e.target.clientHeight;
     if (bottom) { 

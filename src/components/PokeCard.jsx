@@ -25,34 +25,67 @@ const PokeCard = ({ name }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
+    // Fetch Pokemon data based on the updated name
     fetchPokemonData();
     // eslint-disable-next-line 
   }, [name]);
 
+  /**
+   * Fetches Pokemon data by name and updates the Pokemon data state.
+   */
   const fetchPokemonData = async () => {
     try {
+        // Set loading state to indicate data fetching
         setLoading(true);
 
+        // Fetch Pokemon data from the API based on the provided name
         const apiData = await getPokemonData(name);
         setPokeData(apiData);
         
         setTimeout(function() {
+          // Turn off loading state and set visibility state after a delay
           setLoading(false);
 
           setIsVisible(true);
+          // Set visibility to false after another delay to remove visibility effect
           setTimeout(() => {
             setIsVisible(false);
           }, 600);
         }, 3000);
 
     } catch (error) {
+      // Handle errors by logging to the console
         console.error("fetchPokemonData: err: " + error);
     }
   }
 
+  /**
+   * Determines the CSS class for applying a flashing effect based on visibility state.
+   *
+   * @returns {string} The CSS class for the flashing effect or an empty string.
+   */
   const setFlash = () => isVisible ? 'flash' : '';
+  
+  /**
+   * Retrieves the URL of the Pokemon image based on the shiny state.
+   *
+   * @returns {string|null} The URL of the Pokemon image or null if pokeData is undefined.
+   */
   const getPokemonImage = () => isShiny ? pokeData?.artwork.shiny.front : pokeData?.artwork.default.front;
+
+  /**
+   * Retrieves the background color for the Pokemon display based on pokeData.
+   *
+   * @returns {string} The background color or 'default' if pokeData is undefined.
+   */
   const getBackgroundColor = () => pokeData ? pokeData?.color : 'default';
+
+  /**
+   * Calculates the adjusted height for a Pokemon.
+   *
+   * @param {number} height - The original height of the Pokemon.
+   * @returns {number} The adjusted height after adding 250 units.
+   */
   const getPokemonHeight = (height) => height + 250;
   
   return (
