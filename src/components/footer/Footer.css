@@ -1,0 +1,38 @@
+.footer {
+    background-color: #292524;
+    height: 5rem;
+    width: 100vw;
+    padding: 1rem 0;
+    position: fixed;
+    bottom: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    z-index: 5;
+}
+
+.footer button {
+    color: var(--secondary);
+    background-color: var(--accent);
+    width: 3rem;
+    margin: 0 .5rem;
+    padding: .8rem;
+    border: none;
+    border-radius: .5rem;
+}
+
+
+.footer button:hover {
+    background-color: var(--accent-c5);
+}
+
+.footer button:disabled {
+    background-color: var(--accent-75);
+}
+
+.footer button:first-child,
+.footer button:last-child {
+    width: 5rem;
+}
