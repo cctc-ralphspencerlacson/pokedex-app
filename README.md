@@ -1,7 +1,10 @@
 # Pokedex React Application
 This is a simple Pokedex React application that fetches Pokemon data from pokeapi.co using Axios and displays them in a user-friendly interface. The application allows users to browse through a list of Pokemon and view details of individual Pokemon.
 
-![alt poke-api](https://github.com/ralphscl/pokedex/blob/main/src/assets/pokeapi.png "Poke Api")
+<p align="center">
+  <img src="https://github.com/ralphscl/pokedex/blob/main/src/assets/pokeapi.png" alt="poke-api"/>
+</p>
+
 
 ## Demo
 https://pokedex.ralphscl.com/
@@ -15,10 +18,7 @@ Displays individual Pokemon data, including an image and additional information.
 Responsive and user-friendly design.
 
 ## Technologies Used
-* NodeJS
-* ReactJS
-* Express
-* Axios
+* ![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white) ![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB) ![Express.js](https://img.shields.io/badge/express.js-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB)
 * pokeapi.co (Pokemon API)
 
 ## Installation
