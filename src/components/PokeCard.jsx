@@ -9,9 +9,9 @@ import { getPokemonData } from "../service/pokeapi.js";
 // Utils
 import { removeHyphen, capitalize } from "../utils/StringUtils.js";
 // Assets
-import { ReactComponent as Wave1 } from '../assets/wave1.svg';
-import { ReactComponent as Wave2 } from '../assets/wave2.svg';
-import { ReactComponent as Wave3 } from '../assets/wave3.svg';
+import { ReactComponent as Wave1 } from '../assets/waves/wave1.svg';
+import { ReactComponent as Wave2 } from '../assets/waves/wave2.svg';
+import { ReactComponent as Wave3 } from '../assets/waves/wave3.svg';
 import Default from '../assets/default.png';
 // CSS
 import './PokeCard.css';

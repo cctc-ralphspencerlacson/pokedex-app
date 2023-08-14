@@ -5,6 +5,8 @@ import { getStatLabel, getMaxStat } from '../../../utils/OtherUtils';
 import ProgressBar from '../../others/ProgressBar/ProgressBar';
 // Utilities
 import { capitalize, extractRomanNumerals } from '../../../utils/StringUtils';
+// Assets
+import { ReactComponent as External } from '../../../assets/icons/external.svg';
 // CSS
 import './PokeDetails.css';
 
@@ -41,7 +43,7 @@ const PokeDetails = ({ pokeData, colorScheme }) => {
                 href={`https://www.pokemon.com/us/pokedex/${pokeData.name.en}`} 
                 target='_blank' 
                 rel="noreferrer"> 
-                read more &gt; 
+                <External className={`c-${colorScheme}`} /> 
               </a>
             </p>
           </div>
