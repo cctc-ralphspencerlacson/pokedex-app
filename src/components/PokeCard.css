@@ -88,19 +88,32 @@
 /* sm */
 @media (min-width: 640px) {
     .home .list .card .name-jp {
-        font-size: 4rem;
+        font-size: 5.6rem;
     }
 }
 /* md */
 @media (min-width: 768px) {
+    .home .list .card .name-en {
+        font-size: 3.2rem;
+    }
     .home .list .card .name-jp {
-        font-size: 5.5rem;
+        font-size: 5rem;
     }
 }
 
 /* lg */
 @media (min-width: 1024px){
     .home .list .card .name-jp {
-        font-size: 6.5rem;
+        font-size: 5rem;
+    }
+}
+
+/* xl */
+@media (min-width: 1400px){    
+    .home .list .card .name-en {
+        font-size: 3rem;
+    }
+    .home .list .card .name-jp {
+        font-size: 4.6rem;
     }
 }
