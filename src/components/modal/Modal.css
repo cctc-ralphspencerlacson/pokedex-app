@@ -32,4 +32,5 @@
   font-size: 28px;
   font-weight: bold;
   cursor: pointer;
+  z-index: 100;
 }

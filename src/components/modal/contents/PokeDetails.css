@@ -29,6 +29,7 @@
     position: absolute;
     top: 2rem;
     left: 2rem;
+    z-index: 100;
 }
 
 
@@ -59,6 +60,7 @@
 
     border-radius: 1rem;
     box-shadow: 0 3px 10px rgb(0,0,0,0.2);
+    z-index: 1;
 }
 
 .modal .content .information h2 {
@@ -169,6 +171,7 @@
 @media (min-width: 1024px){
     .modal .content {
         grid-template-columns: repeat(2, 1fr);
+        overflow-y: hidden;
     }
 
     .modal .content .visual p.name-en {

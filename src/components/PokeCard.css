@@ -34,7 +34,18 @@
 .home .list .card .height,
 .home .list .card .weight {
     color: white;
+}
+
+.home .list .card .id,
+.home .list .card .name-en,
+.home .list .card .name-jp {
     font-weight: 900;
+}
+
+.home .list .card .region,
+.home .list .card .height,
+.home .list .card .weight {
+    font-weight: bold;
 }
 
 .home .list .card .id{
@@ -110,6 +121,10 @@
 
 /* xl */
 @media (min-width: 1400px){    
+    .home .list .card {
+        height: 39rem;
+    }
+
     .home .list .card .name-en {
         font-size: 3rem;
     }

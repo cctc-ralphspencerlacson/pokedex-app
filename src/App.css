@@ -183,3 +183,9 @@ body {
     right: 0;
     bottom: 18rem;
 }
+
+/* scrollbar */
+/* width */
+::-webkit-scrollbar {
+  display: none;
+}

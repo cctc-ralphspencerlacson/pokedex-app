@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { capitalize } from '../../utils/StringUtils';
 import './Dropdown.css';
 
 /**
