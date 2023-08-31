@@ -122,7 +122,7 @@
 /* xl */
 @media (min-width: 1400px){    
     .home .list .card {
-        height: 39rem;
+        height: auto;
     }
 
     .home .list .card .name-en {
