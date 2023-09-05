@@ -121,10 +121,6 @@
 
 /* xl */
 @media (min-width: 1400px){    
-    .home .list .card {
-        height: auto;
-    }
-
     .home .list .card .name-en {
         font-size: 3rem;
     }

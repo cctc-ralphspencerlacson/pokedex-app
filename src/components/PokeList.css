@@ -55,8 +55,8 @@
 }
 
 /* xl */
-@media (min-width: 1400px){
+/* @media (min-width: 1400px){
     .home .list  {
         grid-template-columns: repeat(6, minmax(0, 1fr));
     }
-}
+} */
