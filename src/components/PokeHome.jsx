@@ -113,7 +113,7 @@ const PokeHome = () => {
         
         // Turn off loading state after a delay
         setLoading(false);
-      }, 3500);
+      }, 2000);
     } catch (error) {
       // Handle errors by logging to the console
       console.error("fetchPokemon: err: " + error);

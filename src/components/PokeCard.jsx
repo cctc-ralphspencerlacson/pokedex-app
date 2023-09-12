@@ -51,7 +51,7 @@ const PokeCard = ({ name }) => {
           setTimeout(() => {
             setIsVisible(false);
           }, 600);
-        }, 3000);
+        }, 1200);
 
     } catch (error) {
       // Handle errors by logging to the console
