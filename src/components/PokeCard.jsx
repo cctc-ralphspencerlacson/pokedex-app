@@ -88,7 +88,7 @@ const PokeCard = ({ name }) => {
    * @returns {number} The adjusted height after adding 250 units.
    */
   const getPokemonHeight = (height) => height + 250;
-  
+  console.log(getPokemonImage());
   return (
     <>
     <div 
@@ -111,7 +111,7 @@ const PokeCard = ({ name }) => {
             <p className={`weight ${isObjectUndefined(pokeData) ? '' : 'undefined' }`}>{`Weight: ${pokeData?.weight || 'N/A'}`}</p>
             {pokeData ? (
               <img 
-                src={getPokemonImage()} 
+                src={getPokemonImage() ? getPokemonImage() : Default} 
                 alt={`${pokeData?.id}-${pokeData?.name.en}-sprite`} 
                 style={{height: getPokemonHeight(pokeData?.height)}}
               />
