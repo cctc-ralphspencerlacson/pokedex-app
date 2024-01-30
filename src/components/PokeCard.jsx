@@ -8,6 +8,7 @@ import PokeDetails from "./modal/contents/PokeDetails";
 import { getPokemonData } from "../service/pokeapi.js";
 // Utils
 import { removeHyphen, capitalize } from "../utils/StringUtils.js";
+import { isObjectUndefined } from "../utils/ObjectUtils.js";
 // Assets
 import { ReactComponent as Wave1 } from '../assets/waves/wave1.svg';
 import { ReactComponent as Wave2 } from '../assets/waves/wave2.svg';
@@ -88,13 +89,12 @@ const PokeCard = ({ name }) => {
    */
   const getPokemonHeight = (height) => height + 250;
   
-  console.log(pokeData)
   return (
     <>
     <div 
       key={name} 
       className={`card bg-${getBackgroundColor()} ${setFlash()}`}
-      onClick={() => setIsModalOpen(pokeData != undefined && true)}
+      onClick={() => setIsModalOpen(isObjectUndefined(pokeData))}
     >
       { !loading ? (
           <>
@@ -104,11 +104,11 @@ const PokeCard = ({ name }) => {
                 setShowShiny={(value) => setIsShiny(value)} 
               />
             )}
-            <p className="id">{`#${pokeData?.id || 'N/A'}`}</p>
-            <p className="name-en">{capitalize(removeHyphen(name))}</p>
-            <p className="region">{`Region: ${capitalize(pokeData?.region)}`}</p>
-            <p className="height">{`Height: ${pokeData?.height || 'N/A'}`}</p>
-            <p className="weight">{`Weight: ${pokeData?.weight || 'N/A'}`}</p>
+            <p className={`id ${isObjectUndefined(pokeData) ? '' : 'undefined' }`}>{`#${pokeData?.id || 'N/A'}`}</p>
+            <p className={`name-en ${isObjectUndefined(pokeData) ? '' : 'undefined' }`}>{capitalize(removeHyphen(name))}</p>
+            <p className={`region ${isObjectUndefined(pokeData) ? '' : 'undefined' }`}>{`Region: ${capitalize(pokeData?.region)}`}</p>
+            <p className={`height ${isObjectUndefined(pokeData) ? '' : 'undefined' }`}>{`Height: ${pokeData?.height || 'N/A'}`}</p>
+            <p className={`weight ${isObjectUndefined(pokeData) ? '' : 'undefined' }`}>{`Weight: ${pokeData?.weight || 'N/A'}`}</p>
             {pokeData ? (
               <img 
                 src={getPokemonImage()} 

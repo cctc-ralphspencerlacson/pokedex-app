@@ -36,6 +36,15 @@
     color: white;
 }
 
+.home .list .card .id.undefined,
+.home .list .card .name-en.undefined,
+.home .list .card .name-jp.undefined,
+.home .list .card .region.undefined,
+.home .list .card .height.undefined,
+.home .list .card .weight.undefined {
+    color: var(--black);
+}
+
 .home .list .card .id,
 .home .list .card .name-en,
 .home .list .card .name-jp {
