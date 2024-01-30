@@ -88,12 +88,13 @@ const PokeCard = ({ name }) => {
    */
   const getPokemonHeight = (height) => height + 250;
   
+  console.log(pokeData)
   return (
     <>
     <div 
       key={name} 
       className={`card bg-${getBackgroundColor()} ${setFlash()}`}
-      onClick={() => setIsModalOpen(true)}
+      onClick={() => setIsModalOpen(pokeData != undefined && true)}
     >
       { !loading ? (
           <>
