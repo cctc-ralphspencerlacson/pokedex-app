@@ -7,7 +7,7 @@ This is a simple Pokedex React application that fetches Pokemon data from pokeap
 
 
 ## Demo
-https://cineverse-5z2qs70bs-ralphscls-projects.vercel.app/
+https://cineverse-ralphscls-projects.vercel.app/
 
 ## Screenshots
 Coming soon
