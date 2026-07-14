@@ -18,6 +18,20 @@ const capitalizeTeamName = (name = '') => name
   .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
   .join(' ');
 
+const TEAM_STORAGE_KEY = 'pokedex-team';
+
+const getStoredTeam = () => {
+  try {
+    const storedTeam = JSON.parse(window.localStorage.getItem(TEAM_STORAGE_KEY));
+    if (!Array.isArray(storedTeam)) return Array(6).fill(null);
+
+    return Array.from({ length: 6 }, (_, index) => storedTeam[index] || null);
+  } catch (error) {
+    console.error('Could not load saved team:', error);
+    return Array(6).fill(null);
+  }
+};
+
 const KeyboardHint = ({ activeControl, onControl }) => {
   const dragStart = useRef(null);
   const didDrag = useRef(false);
@@ -91,7 +105,7 @@ const PokeHome = () => {
   const [removingNames, setRemovingNames] = useState([]);
   const [deckAdding, setDeckAdding] = useState(false);
   const [addingNames, setAddingNames] = useState([]);
-  const [team, setTeam] = useState(Array(6).fill(null));
+  const [team, setTeam] = useState(getStoredTeam);
   const [activeControl, setActiveControl] = useState(null);
   const [controlRequest, setControlRequest] = useState(null);
   const loadingMoreRef = useRef(false);
@@ -115,7 +129,18 @@ const PokeHome = () => {
     displayName: capitalizeTeamName(pokemon.name.en),
     id: pokemon.id,
     sprite: pokemon.sprites?.default?.front || pokemon.artwork?.default?.front,
+    artwork: pokemon.artwork?.default?.front,
+    species: pokemon.species,
+    generation: pokemon.generation,
+    region: pokemon.region,
+    height: pokemon.height,
+    weight: pokemon.weight,
     types: pokemon.types?.map(({ type }) => type.name) || [],
+    abilities: pokemon.abilities?.map(({ ability }) => ability.name) || [],
+    stats: pokemon.stats?.map(({ stat, base_stat }) => ({
+      name: stat.name,
+      value: base_stat,
+    })) || [],
   });
 
   const addPokemonToTeam = (pokemon) => {
@@ -161,6 +186,14 @@ const PokeHome = () => {
   };
 
   const clearTeam = () => setTeam(Array(6).fill(null));
+
+  useEffect(() => {
+    try {
+      window.localStorage.setItem(TEAM_STORAGE_KEY, JSON.stringify(team));
+    } catch (error) {
+      console.error('Could not save team:', error);
+    }
+  }, [team]);
 
   useEffect(() => {
     fetchPokemons(0, false);

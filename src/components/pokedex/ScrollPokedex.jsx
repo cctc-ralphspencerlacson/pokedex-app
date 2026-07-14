@@ -448,7 +448,8 @@ export default function ScrollPokedex({ pokemons, onNearEnd, loadingMore, jumpRe
     }
 
     const previousActive = previousActiveRef.current;
-    if (activeIndex !== previousActive) {
+    const didActiveChange = activeIndex !== previousActive;
+    if (didActiveChange) {
       pullDirectionRef.current = Math.random() > 0.5 ? 1 : -1;
     }
     const pullDirection = pullDirectionRef.current;
@@ -537,6 +538,27 @@ export default function ScrollPokedex({ pokemons, onNearEnd, loadingMore, jumpRe
           ease: 'expo.out',
           overwrite: 'auto',
         });
+        return;
+      }
+
+      if (distance === 0 && didActiveChange) {
+        gsap.timeline({ defaults: { overwrite: 'auto' } })
+          .set(card, { zIndex: config.zIndex })
+          .to(card, {
+            xPercent: -50,
+            yPercent: -50,
+            x: 0,
+            y: 74,
+            rotation: 0,
+            scale: 0.97,
+            duration: 0.26,
+            ease: 'power2.inOut',
+          })
+          .to(card, {
+            ...config,
+            duration: 0.58,
+            ease: 'expo.out',
+          });
         return;
       }
 
