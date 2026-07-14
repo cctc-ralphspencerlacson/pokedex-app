@@ -1,0 +1,196 @@
+.team-builder {
+  position: fixed;
+  left: 2rem;
+  top: 2rem;
+  z-index: 95;
+  width: min(16rem, calc(100vw - 4rem));
+  padding: 1rem;
+  color: white;
+  background: rgba(15, 23, 42, 0.78);
+  border: 1px solid rgba(255,255,255,0.14);
+  border-radius: 2rem;
+  box-shadow: var(--shadow-soft);
+  text-align: left;
+  outline: 0;
+  backdrop-filter: blur(18px);
+  transition: width 0.55s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.55s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.team-builder:hover,
+.team-builder:focus,
+.team-builder:focus-within,
+.team-builder.is-drag-open {
+  width: min(25rem, calc(100vw - 4rem));
+  transform: translateX(0.8rem);
+}
+
+.team-builder-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.85rem;
+}
+
+.team-builder:not(:hover):not(:focus):not(:focus-within):not(.is-drag-open) .team-builder-header {
+  margin-bottom: 0;
+}
+
+.team-builder-header p {
+  color: var(--accent);
+  font-size: 0.95rem;
+  font-weight: 1000;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.team-builder-header strong {
+  display: block;
+  margin-top: 0.25rem;
+  color: rgba(255,255,255,0.82);
+  font-size: 1.05rem;
+  font-weight: 900;
+}
+
+.team-builder-header button {
+  color: rgba(255,255,255,0.84);
+  background: rgba(255,255,255,0.08);
+  padding: 0.55rem 0.8rem;
+  border: 1px solid rgba(255,255,255,0.14);
+  border-radius: 999px;
+  font-size: 0.95rem;
+  font-weight: 900;
+  cursor: pointer;
+  transition: opacity 0.24s ease, transform 0.24s ease;
+}
+
+.team-builder:not(:hover):not(:focus):not(:focus-within):not(.is-drag-open) .team-builder-header button {
+  pointer-events: none;
+  opacity: 0;
+  transform: translateX(-0.8rem);
+}
+
+.team-slots {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.7rem;
+  max-height: 18rem;
+  opacity: 1;
+  overflow: visible;
+  transform: translateY(0);
+  transition: opacity 0.36s ease, transform 0.46s cubic-bezier(0.2, 0.8, 0.2, 1), max-height 0.46s ease;
+}
+
+.team-builder:not(:hover):not(:focus):not(:focus-within):not(.is-drag-open) .team-slots {
+  max-height: 0;
+  pointer-events: none;
+  opacity: 0;
+  overflow: hidden;
+  transform: translateY(-0.7rem);
+}
+
+.team-slot {
+  min-height: 7.8rem;
+  display: grid;
+  place-items: center;
+  gap: 0.15rem;
+  color: rgba(255,255,255,0.74);
+  background: rgba(255,255,255,0.08);
+  border: 1px dashed rgba(255,255,255,0.18);
+  border-radius: 1.35rem;
+  cursor: default;
+  font: inherit;
+  overflow: hidden;
+  transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+
+.team-slot.is-filled {
+  cursor: pointer;
+  background: rgba(255,255,255,0.13);
+  border-style: solid;
+}
+
+.team-slot.is-drag-over {
+  background: rgba(249,115,22,0.28);
+  border-color: rgba(249,115,22,0.78);
+  border-style: solid;
+  box-shadow: 0 0 0 0.28rem rgba(249,115,22,0.18);
+  transform: translateY(-0.15rem) scale(1.03);
+}
+
+.team-slot.is-filled:hover,
+.team-slot.is-filled:focus-visible {
+  background: rgba(249,115,22,0.22);
+  border-color: rgba(249,115,22,0.58);
+  transform: translateY(-0.15rem);
+}
+
+.team-slot img {
+  width: 5.4rem;
+  height: 5.4rem;
+  object-fit: contain;
+  image-rendering: pixelated;
+  filter: drop-shadow(0 0.7rem 0.8rem rgba(2,6,23,0.3));
+}
+
+.team-slot span {
+  max-width: 100%;
+  overflow: hidden;
+  padding: 0 0.35rem;
+  font-size: 0.9rem;
+  font-weight: 1000;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.empty-slot {
+  width: 3.2rem;
+  height: 3.2rem;
+  display: grid;
+  place-items: center;
+  color: rgba(255,255,255,0.36);
+  border: 1px solid rgba(255,255,255,0.16);
+  border-radius: 50%;
+}
+
+.team-drag-image {
+  position: fixed;
+  left: -999rem;
+  top: -999rem;
+  width: 6.4rem;
+  height: 6.4rem;
+  object-fit: contain;
+  image-rendering: pixelated;
+  pointer-events: none;
+  z-index: -1;
+}
+
+@media (max-width: 767px) {
+  .team-builder {
+    left: 1rem;
+    top: 8.8rem;
+    width: min(15rem, calc(100vw - 2rem));
+    padding: 0.8rem;
+  }
+
+  .team-builder:hover,
+  .team-builder:focus,
+  .team-builder:focus-within,
+  .team-builder.is-drag-open {
+    width: min(20rem, calc(100vw - 2rem));
+    transform: none;
+  }
+
+  .team-slots {
+    gap: 0.5rem;
+  }
+
+  .team-slot {
+    min-height: 6.8rem;
+  }
+
+  .team-slot img {
+    width: 4.6rem;
+    height: 4.6rem;
+  }
+}

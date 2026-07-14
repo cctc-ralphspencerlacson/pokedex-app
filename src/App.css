@@ -10,8 +10,13 @@ html {
 }
 
 body {
-  background-color: var(--primary);
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at top left, rgba(252, 165, 165, 0.22), transparent 28rem),
+    radial-gradient(circle at top right, rgba(147, 197, 253, 0.18), transparent 34rem),
+    linear-gradient(135deg, #0f172a 0%, #1e1b4b 45%, #111827 100%);
   overflow: hidden;
+  color: var(--ink);
 }
 
 .App {
@@ -20,24 +25,32 @@ body {
 
 :root {
   /* Background Colors */
-  --black: #47565B;
-  --blue: #93C5FD;
+  --black: #334155;
+  --blue: #60A5FA;
   --brown: #B45309;
-  --gray:  #71717A;
-  --green: #BEF264;
-  --pink: #F9A8D4;
-  --purple: #D8B4FE;
-  --red: #FCA5A5;
-  --white: #D4D4D8;
-  --yellow: #FDE047;
-  --default: white;
+  --gray:  #94A3B8;
+  --green: #A3E635;
+  --pink: #F472B6;
+  --purple: #A78BFA;
+  --red: #F87171;
+  --white: #E5E7EB;
+  --yellow: #FACC15;
+  --default: #F8FAFC;
 
-  --primary: #292524;
-  --secondary: #ECFEFF;
+  --primary: #0F172A;
+  --secondary: #F8FAFC;
+  --surface: rgba(255, 255, 255, 0.78);
+  --surface-strong: rgba(255, 255, 255, 0.92);
+  --surface-dark: rgba(15, 23, 42, 0.78);
+  --ink: #E5E7EB;
+  --muted: #94A3B8;
 
-  --accent: #C76958;
-  --accent-c5: #c76958c5;
-  --accent-75: #c7695875;
+  --accent: #F97316;
+  --accent-c5: #f97316c5;
+  --accent-75: #f9731675;
+  --ring: rgba(249, 115, 22, 0.28);
+  --shadow-card: 0 2rem 5rem rgba(2, 6, 23, 0.28);
+  --shadow-soft: 0 1.2rem 3rem rgba(2, 6, 23, 0.18);
 }
 
 

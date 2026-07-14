@@ -1,34 +1,30 @@
-// Component
-import PokeCard from "./PokeCard";
-// Asset
-import cryingPikachu from "../assets/pikachu/crying-pikachu.png"
-// CSS
+import ScrollPokedex from './pokedex/ScrollPokedex';
+import cryingPikachu from '../assets/pikachu/crying-pikachu.png';
 import './PokeList.css';
 
-const PokeList = ({ pokemons, pokemon3dData }) => {
-
-  // Not in use
-  const handleScroll = (e) => {
-    const bottom = e.target.scrollHeight - e.target.scrollTop === e.target.clientHeight;
-    if (bottom) { 
-      // 
-    }
-  }
-  
+const PokeList = ({ pokemons, onNearEnd, loadingMore, jumpRequest, isFiltering, removingNames, isAdding, addingNames, controlRequest, team, onAddToTeam }) => {
   return (
     <>
-    {pokemons.count !== 0 ? (
-      <div className="list" onScroll={handleScroll}>
-        {pokemons?.results?.map((pokemon) => (
-          <PokeCard key={pokemon.name} name={pokemon.name || pokemon.pokemon.name} pokemon3dData={pokemon3dData} />
-        ))}
-      </div>
-    ) : (
-      <div className="not-found">
-        <h1>No Pokemon found</h1>
-        <img src={cryingPikachu} alt="crying-pikachu" />
-      </div>
-    )}
+      {pokemons.count !== 0 ? (
+        <ScrollPokedex
+          pokemons={pokemons}
+          onNearEnd={onNearEnd}
+          loadingMore={loadingMore}
+          jumpRequest={jumpRequest}
+          isFiltering={isFiltering}
+          removingNames={removingNames}
+          isAdding={isAdding}
+          addingNames={addingNames}
+          controlRequest={controlRequest}
+          team={team}
+          onAddToTeam={onAddToTeam}
+        />
+      ) : (
+        <div className="not-found">
+          <h1>No Pokemon found</h1>
+          <img src={cryingPikachu} alt="crying-pikachu" />
+        </div>
+      )}
     </>
   );
 }

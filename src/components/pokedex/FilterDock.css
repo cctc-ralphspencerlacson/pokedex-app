@@ -1,0 +1,170 @@
+.filter-dock {
+  position: fixed;
+  left: 2rem;
+  bottom: 2rem;
+  z-index: 90;
+  width: min(23rem, calc(100vw - 4rem));
+  max-height: 58vh;
+  padding: 0;
+  overflow: visible;
+  text-align: left;
+  outline: 0;
+  transition: width 0.55s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.55s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.filter-dock:hover,
+.filter-dock:focus,
+.filter-dock:focus-within {
+  width: min(44rem, calc(100vw - 4rem));
+  transform: translateX(0.8rem);
+}
+
+.filter-dock-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.8rem;
+  padding: 1rem 1.1rem;
+  background: rgba(15, 23, 42, 0.78);
+  border: 1px solid rgba(255,255,255,0.14);
+  border-radius: 1.8rem;
+  box-shadow: var(--shadow-soft);
+  backdrop-filter: blur(18px);
+}
+
+.filter-dock:not(:hover):not(:focus):not(:focus-within) .filter-dock-header {
+  margin-bottom: 0;
+}
+
+.filter-dock-header p {
+  color: var(--accent);
+  font-size: 1rem;
+  font-weight: 900;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.filter-dock-header strong {
+  display: block;
+  max-width: 16rem;
+  overflow: hidden;
+  color: rgba(255,255,255,0.86);
+  margin-top: 0.35rem;
+  font-size: 1.15rem;
+  font-weight: 900;
+  line-height: 1.2;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.filter-dock-header button,
+.filter-dock-row button {
+  color: rgba(248,250,252,0.82);
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 999px;
+  font-size: 1.05rem;
+  font-weight: 900;
+  cursor: pointer;
+  transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+
+.filter-dock-header button {
+  padding: 0.55rem 0.8rem;
+}
+
+.filter-dock:not(:hover):not(:focus):not(:focus-within) .filter-dock-header button {
+  pointer-events: none;
+  opacity: 0;
+  transform: translateX(-0.8rem);
+}
+
+.filter-dock-body {
+  max-height: 48vh;
+  opacity: 1;
+  overflow: visible;
+  transform: translateX(0);
+  transition: opacity 0.42s ease, transform 0.48s cubic-bezier(0.2, 0.8, 0.2, 1), max-height 0.55s ease;
+}
+
+.filter-dock:not(:hover):not(:focus):not(:focus-within) .filter-dock-body {
+  max-height: 0;
+  pointer-events: none;
+  opacity: 0;
+  overflow: hidden;
+  transform: translateX(-1rem);
+}
+
+.filter-dock-section {
+  padding: 1rem;
+  background: rgba(15, 23, 42, 0.74);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 1.8rem;
+  box-shadow: var(--shadow-soft);
+  backdrop-filter: blur(18px);
+}
+
+.filter-dock-section + .filter-dock-section {
+  margin-top: 0.8rem;
+}
+
+.filter-section-label {
+  display: block;
+  color: rgba(248,250,252,0.64);
+  margin: 0 0 0.8rem 0.2rem;
+  font-size: 0.95rem;
+  font-weight: 900;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.filter-dock-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+  overflow: visible;
+  padding-bottom: 0;
+}
+
+.filter-dock-row + .filter-dock-row {
+  margin-top: 0.7rem;
+}
+
+.filter-dock-row button {
+  flex: 0 0 auto;
+  padding: 0.65rem 0.9rem;
+}
+
+.filter-dock-row button:hover,
+.filter-dock-row button.active {
+  color: white;
+  background: rgba(249,115,22,0.72);
+  border-color: rgba(249,115,22,0.8);
+  transform: translateY(-0.1rem);
+}
+
+.type-row button.active {
+  background: rgba(96,165,250,0.52);
+  border-color: rgba(96,165,250,0.72);
+}
+
+@media (max-width: 767px) {
+  .filter-dock {
+    left: 1rem;
+    bottom: 1rem;
+    width: min(22rem, calc(100vw - 2rem));
+    max-height: 58vh;
+  }
+
+  .filter-dock:hover,
+  .filter-dock:focus,
+  .filter-dock:focus-within {
+    width: calc(100vw - 2rem);
+    transform: none;
+  }
+
+  .filter-dock-section {
+    padding: 0.9rem;
+  }
+}

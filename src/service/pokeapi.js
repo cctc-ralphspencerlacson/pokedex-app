@@ -11,34 +11,24 @@ import axios from "axios";
 
 const baseUrl = "https://pokeapi.co/api/v2/"
 
-/**
- * Retrieves Pokemon species data by ID.
- *
- * @param {number} id - The ID of the Pokemon species.
- * @returns {Promise<Object>} A Promise that resolves to the data of the Pokemon species.
- */
-export const getPokemonById = async (id) => {
-    // Construct the API endpoint for the Pokemon species data
-    let parameters = `pokemon-species/${id}`;
-    
-    try {    
-        // Fetch the Pokemon species data by ID
-        const response = await axios.get(baseUrl + parameters);
+const _requestCache = new Map();
+const _requestPromiseCache = new Map();
 
-        // Assemble and return the data for the Pokemon species
-        const data = {
-            count: 1,
-            results: [{
-                name: response?.data.name,
-                url: `https://pokeapi.co/api/v2/pokemon-species/${response?.data.id}`
-            }]
-        }
-        
-        return data;
-    } catch (error) {
-        // Handle errors by logging to the console
-        console.error(error);
-    }
+const cachedGet = async (url) => {
+    if (_requestCache.has(url)) return _requestCache.get(url);
+    if (_requestPromiseCache.has(url)) return _requestPromiseCache.get(url);
+
+    const promise = axios.get(url)
+        .then((response) => {
+            _requestCache.set(url, response);
+            return response;
+        })
+        .finally(() => {
+            _requestPromiseCache.delete(url);
+        });
+
+    _requestPromiseCache.set(url, promise);
+    return promise;
 }
 
 /**
@@ -60,8 +50,8 @@ export const getPokemonsPaginated = async (typeFilter, regionFilter, offset, lim
         // Combined filter: intersect type and generation lists
         if (isTypeActive && isRegionActive) {
             const [typeResponse, genResponse] = await Promise.all([
-                axios.get(baseUrl + `type/${typeFilter}`),
-                axios.get(baseUrl + `generation/${regionFilter}`)
+                cachedGet(baseUrl + `type/${typeFilter}`),
+                cachedGet(baseUrl + `generation/${regionFilter}`)
             ]);
 
             const genNames = new Set(
@@ -80,7 +70,7 @@ export const getPokemonsPaginated = async (typeFilter, regionFilter, offset, lim
             };
 
         } else if (isTypeActive) {
-            const response = await axios.get(baseUrl + `type/${typeFilter}`);
+            const response = await cachedGet(baseUrl + `type/${typeFilter}`);
     
             const results = response.data.pokemon.slice(offset, offset + limit);
     
@@ -90,7 +80,7 @@ export const getPokemonsPaginated = async (typeFilter, regionFilter, offset, lim
             };
             
         } else if (isRegionActive) {
-            const response = await axios.get(baseUrl + `generation/${regionFilter}`);
+            const response = await cachedGet(baseUrl + `generation/${regionFilter}`);
     
             const results = response.data.pokemon_species.slice(offset, offset + limit);
     
@@ -99,7 +89,7 @@ export const getPokemonsPaginated = async (typeFilter, regionFilter, offset, lim
                 results: results
             };
         } else {
-            const response = await axios.get(baseUrl + `pokemon-species?offset=${offset}&limit=${limit}`);
+            const response = await cachedGet(baseUrl + `pokemon-species?offset=${offset}&limit=${limit}`);
             
             data = {
                 count: response?.data.count,
@@ -125,7 +115,7 @@ export const getPokemonsSearchData = async () => {
 
     try {
         // Fetch the Pokemon species data for search
-        const response = await axios.get(baseUrl + parameters);
+        const response = await cachedGet(baseUrl + parameters);
 
         // Assemble and return the search data
         const data = {
@@ -146,12 +136,22 @@ export const getPokemonsSearchData = async () => {
  * @param {string} name - The name of the Pokemon.
  * @returns {Promise<Object>} A Promise that resolves to the detailed data of the Pokemon.
  */
+let _pokemonDataCache = null;
+let _pokemonDataPromiseCache = null;
 export const getPokemonData = async (name) => {
+    if (!_pokemonDataCache) _pokemonDataCache = new Map();
+    if (!_pokemonDataPromiseCache) _pokemonDataPromiseCache = new Map();
+
+    const cacheKey = String(name).toLowerCase();
+    if (_pokemonDataCache.has(cacheKey)) return _pokemonDataCache.get(cacheKey);
+    if (_pokemonDataPromiseCache.has(cacheKey)) return _pokemonDataPromiseCache.get(cacheKey);
+
+    const promise = (async () => {
     try {
         // Fetch data for the Pokemon species and Pokemon itself in parallel
         const [pokemonResponse, speciesResponse] = await Promise.all([
-            axios.get(baseUrl + `pokemon/${name}`),
-            axios.get(baseUrl + `pokemon-species/${name}`)
+            cachedGet(baseUrl + `pokemon/${cacheKey}`),
+            cachedGet(baseUrl + `pokemon-species/${cacheKey}`)
         ]);
         const pokemonData = pokemonResponse.data;
         const speciesData = speciesResponse.data;
@@ -168,6 +168,7 @@ export const getPokemonData = async (name) => {
             },
             pokedex_entry: pokemonDesc,
             color: speciesData.color.name,
+            species: speciesData.genera.find(({ language }) => language.name === 'en')?.genus || 'Unknown Pokemon',
             generation: speciesData.generation.name,
             region: await getPokemonRegion(speciesData.generation.name),
             evolution: await getPokemonEvolutionChain(speciesData.evolution_chain.url),
@@ -177,6 +178,11 @@ export const getPokemonData = async (name) => {
             stats: pokemonData.stats,
             types: pokemonData.types,
             abilities: pokemonData.abilities,
+            moves: pokemonData.moves
+                .filter(({ version_group_details }) =>
+                    version_group_details.some((detail) => detail.move_learn_method.name === 'level-up')
+                )
+                .slice(0, 8),
             hasGenderDiff: speciesData.has_gender_differences,
             hasShinyVer: pokemonData?.sprites?.other['official-artwork']?.front_shiny ? true : false,
             artwork: {
@@ -209,11 +215,18 @@ export const getPokemonData = async (name) => {
             held_items: pokemonData.held_items,
         }
 
+        _pokemonDataCache.set(cacheKey, data);
         return data;
     } catch (error) {
         // Handle errors by logging to the console
         console.error(error);
+    } finally {
+        _pokemonDataPromiseCache.delete(cacheKey);
     }
+    })();
+
+    _pokemonDataPromiseCache.set(cacheKey, promise);
+    return promise;
 }
 
 /**
@@ -222,12 +235,12 @@ export const getPokemonData = async (name) => {
  * @param {string} generation - The name of the Pokemon generation.
  * @returns {Promise<string>} A Promise that resolves to the main region name.
  */
-export const getPokemonRegion = async (generation) => {
+const getPokemonRegion = async (generation) => {
     let parameters = `generation/${romanToInteger(extractRomanNumerals(generation))}`;
     
     try {
         // Fetch data for the specified Pokemon generation
-        const response = await axios.get(baseUrl + parameters);
+        const response = await cachedGet(baseUrl + parameters);
         // Return the main region name from the fetched data
         return response.data.main_region.name;
     } catch (error) {
@@ -247,23 +260,13 @@ export const getPokemonRegion = async (generation) => {
  *
  * @returns {Promise<Array>} A Promise that resolves to an array of Pokemon 3D data.
  */
-let _3dDataCache = null;
-let _3dDataPromise = null;
 export const getPokemon3dData = async () => {
-  if (_3dDataCache) return _3dDataCache;
-  if (_3dDataPromise) return _3dDataPromise;
-  _3dDataPromise = axios.get('https://pokemon-3d-api.onrender.com/v1/pokemon')
-    .then(res => {
-      _3dDataCache = res.data;
-      _3dDataPromise = null;
-      return _3dDataCache;
-    })
+  return cachedGet('https://pokemon-3d-api.onrender.com/v1/pokemon')
+    .then(res => res.data)
     .catch(err => {
       console.error('getPokemon3dData: err: ' + err);
-      _3dDataPromise = null;
       return [];
     });
-  return _3dDataPromise;
 };
 
 export const getPokemonTypes = async () => {
@@ -272,7 +275,7 @@ export const getPokemonTypes = async () => {
     
     try {
         // Fetch the Pokemon types data
-        const response = await axios.get(baseUrl + parameters);
+        const response = await cachedGet(baseUrl + parameters);
 
         // Filter out the 'unknown' type and transform the data for display
         const filteredData = response.data.results.filter((type) => type.name !== 'unknown');
@@ -299,7 +302,7 @@ export const getPokemonGenerations = async () => {
 
     try {
         // Fetch the Pokemon generations data
-        const response = await axios.get(baseUrl + parameters);
+        const response = await cachedGet(baseUrl + parameters);
 
         // Transform the data for display
         const transformedData = response.data.results.map(({ name }) => ({
@@ -320,12 +323,12 @@ export const getPokemonGenerations = async () => {
  * @param {number} id - The ID of the Pokemon species.
  * @returns {Promise<string>} A Promise that resolves to the Pokemon description or 'N/A'.
  */
-export const getPokemonDescription = async (id) => {
+const getPokemonDescription = async (id) => {
     // Construct the API endpoint for the Pokemon species data
     let parameters = `pokemon-species/${id}`;
     try {    
         // Fetch the Pokemon species data
-        const response = await axios.get(baseUrl + parameters);
+        const response = await cachedGet(baseUrl + parameters);
         
         // Initialize the description variable
         let desc = ""
@@ -350,10 +353,10 @@ export const getPokemonDescription = async (id) => {
  * @param {string} chainUrl - The URL of the evolution chain.
  * @returns {Promise<Object[]>} A Promise that resolves to an array of Pokemon evolution data.
  */
-export const getPokemonEvolutionChain = async (chainUrl) => {
+const getPokemonEvolutionChain = async (chainUrl) => {
     try {
         // Fetch the evolution chain data from the provided URL
-        const response = await axios.get(chainUrl);        
+        const response = await cachedGet(chainUrl);        
 
         const speciesNames = [];
         
@@ -362,8 +365,8 @@ export const getPokemonEvolutionChain = async (chainUrl) => {
             if (details.species) {
 
                 // Fetch data for the species and Pokemon
-                const pokemonResponse = await axios.get(baseUrl + `pokemon/${details.species.name}`);
-                const speciesResponse = await axios.get(baseUrl + `pokemon-species/${details.species.name}`);
+                const pokemonResponse = await cachedGet(baseUrl + `pokemon/${details.species.name}`);
+                const speciesResponse = await cachedGet(baseUrl + `pokemon-species/${details.species.name}`);
     
                 // Collect species information and related data
                 speciesNames.push({

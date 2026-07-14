@@ -1,6 +1,19 @@
 .home {
-    background: var(--secondary);
-    padding: 0;
+    height: 100vh;
+    position: relative;
+    background: transparent;
+    padding: 2rem 0 4rem;
+    overflow-x: hidden;
+    overflow-y: auto;
+    scroll-behavior: auto;
+    scroll-snap-type: y mandatory;
+    z-index: 1;
+}
+
+.portfolio-shell {
+    min-height: 100vh;
+    position: relative;
+    overflow: hidden;
 }
 
 .home-loading {
@@ -34,9 +47,23 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background: var(--secondary);
+    background: transparent;
 }
 
 .home-loading-simple .pokeball {
     margin: 0 auto;
+}
+
+.home > .keyboard-hint {
+    position: fixed;
+    right: 2rem;
+    bottom: 2rem;
+    z-index: 220;
+}
+
+@media (max-width: 767px) {
+    .home > .keyboard-hint {
+        right: 1rem;
+        bottom: 1rem;
+    }
 }
