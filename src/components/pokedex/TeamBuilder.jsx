@@ -141,6 +141,15 @@ const TeamBuilder = ({ team = [], onRemove, onClear, onDropPokemon, onMoveMember
   const members = useMemo(() => team.filter(Boolean), [team]);
   const analysis = useMemo(() => getTeamAnalysis(members), [members]);
   const selectedMember = selectedIndex === null ? null : team[selectedIndex];
+  const selectedMoveOptions = useMemo(() => {
+    if (!selectedMember) return [];
+
+    const moves = selectedMember.moveOptions?.length
+      ? selectedMember.moveOptions
+      : selectedMember.selectedMoves?.filter(Boolean) || [];
+
+    return Array.from(new Set(moves));
+  }, [selectedMember]);
 
   useEffect(() => {
     if (!filledCount) {
@@ -367,7 +376,6 @@ const TeamBuilder = ({ team = [], onRemove, onClear, onDropPokemon, onMoveMember
               <span>Moves</span>
               {Array.from({ length: 4 }, (_, moveIndex) => {
                 const selectedMoves = selectedMember.selectedMoves || [];
-                const moveOptions = selectedMember.moveOptions?.length ? selectedMember.moveOptions : selectedMoves.filter(Boolean);
 
                 return (
                   <select
@@ -376,13 +384,14 @@ const TeamBuilder = ({ team = [], onRemove, onClear, onDropPokemon, onMoveMember
                     onChange={(event) => updateSelectedMove(moveIndex, event.target.value)}
                   >
                     <option value="">Move {moveIndex + 1}</option>
-                    {moveOptions.map((move) => (
+                    {selectedMoveOptions.map((move) => (
                       <option value={move} key={`${moveIndex}-${move}`}>{formatName(move)}</option>
                     ))}
                   </select>
                 );
               })}
             </div>
+
           </div>
 
           {selectedMember.stats?.length > 0 && (

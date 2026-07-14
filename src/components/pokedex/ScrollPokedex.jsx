@@ -173,9 +173,25 @@ function PokemonShowcase({ name, index, stackState, setCardRef, onPokemonSelect,
             <div className="research-panel moves-panel">
               <h3>Moves</h3>
               <div className="move-pills">
-                {pokemon?.moves?.map(({ move }) => (
+                {pokemon?.moves?.slice(0, 10).map(({ move }) => (
                   <span key={move.name}>{capitalize(removeHyphen(move.name))}</span>
                 ))}
+                {pokemon?.moves?.length > 10 && (
+                  <div className="move-overflow" tabIndex="0">
+                    +{pokemon.moves.length - 10} more
+                    <div className="move-tooltip" role="tooltip">
+                      <div className="move-tooltip-heading">
+                        <h3>More Moves</h3>
+                        <span>{pokemon.moves.length - 10} moves</span>
+                      </div>
+                      <div className="move-tooltip-grid">
+                        {pokemon.moves.slice(10).map(({ move }) => (
+                          <div key={move.name}>{capitalize(removeHyphen(move.name))}</div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
 

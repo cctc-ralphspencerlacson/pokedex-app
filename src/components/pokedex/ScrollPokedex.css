@@ -510,7 +510,8 @@ button.mouse-key {
   gap: 0.6rem;
 }
 
-.move-pills span {
+.move-pills > span,
+.move-pills > .move-overflow {
   padding: 0.52rem 0.78rem;
   color: rgba(255,255,255,0.9);
   background: rgba(255,255,255,0.1);
@@ -518,6 +519,100 @@ button.mouse-key {
   border-radius: 999px;
   font-size: 0.98rem;
   font-weight: 900;
+}
+
+.move-pills .move-overflow {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  color: rgba(253,186,116,0.98);
+  background: rgba(249,115,22,0.18);
+  border-color: rgba(249,115,22,0.36);
+  cursor: help;
+  outline: 0;
+  overflow: visible;
+}
+
+.move-tooltip {
+  position: absolute;
+  right: 0;
+  bottom: calc(100% + 0.7rem);
+  z-index: 120;
+  width: min(30rem, 72vw);
+  max-height: 20rem;
+  display: grid;
+  gap: 0.9rem;
+  overflow-y: auto;
+  padding: 1.45rem;
+  color: #e2e8f0;
+  background: #0f172a;
+  border: 1px solid rgba(255,255,255,0.14);
+  border-radius: 1.15rem;
+  box-shadow: 0 1.2rem 3rem rgba(2,6,23,0.48);
+  backdrop-filter: blur(14px);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(0.45rem) scale(0.98);
+  transition: opacity 0.18s ease, transform 0.18s ease;
+}
+
+.move-tooltip::before {
+  position: absolute;
+  right: 1.2rem;
+  bottom: -0.5rem;
+  width: 0.8rem;
+  height: 0.8rem;
+  content: '';
+  background: #0f172a;
+  border-left: 1px solid rgba(255,255,255,0.14);
+  border-top: 1px solid rgba(255,255,255,0.14);
+  transform: rotate(45deg);
+}
+
+.move-tooltip-heading {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.move-tooltip-heading h3 {
+  margin: 0;
+  color: white;
+  font-size: 1.85rem;
+  font-weight: 1000;
+  line-height: 1;
+}
+
+.move-tooltip-heading span {
+  color: rgba(255,255,255,0.52);
+  font-size: 0.95rem;
+  font-weight: 1000;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.move-tooltip-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.move-tooltip-grid div {
+  padding: 0.52rem 0.78rem;
+  color: rgba(255,255,255,0.9);
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.14);
+  border-radius: 999px;
+  font-size: 0.98rem;
+  font-weight: 900;
+}
+
+.move-overflow:hover .move-tooltip,
+.move-overflow:focus-visible .move-tooltip {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0) scale(1);
 }
 
 .evolution-heading {
