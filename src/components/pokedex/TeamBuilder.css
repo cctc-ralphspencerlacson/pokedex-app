@@ -21,7 +21,7 @@
 .team-builder:focus-within,
 .team-builder.is-drag-open {
   width: min(58rem, calc(100vw - 4rem));
-  min-height: min(46rem, calc(100vh - 4rem));
+  min-height: min(54rem, calc(100vh - 4rem));
   transform: translateX(0.8rem);
 }
 
@@ -172,7 +172,7 @@
 .team-layout {
   display: grid;
   gap: 0.85rem;
-  max-height: 64rem;
+  max-height: none;
   margin-top: 0.85rem;
   opacity: 1;
   transform: translateY(0);
@@ -411,6 +411,58 @@
   font-weight: 900;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+.team-customizer {
+  display: grid;
+  gap: 0.65rem;
+  margin-top: 0.75rem;
+  padding: 0.75rem;
+  background: rgba(15,23,42,0.28);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 1rem;
+}
+
+.team-customizer label,
+.move-customizer {
+  display: grid;
+  gap: 0.4rem;
+  min-width: 0;
+}
+
+.team-customizer label > span,
+.move-customizer > span {
+  color: rgba(255,255,255,0.54);
+  font-size: 0.68rem;
+  font-weight: 1000;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.team-customizer select {
+  min-width: 0;
+  width: 100%;
+  color: rgba(255,255,255,0.88);
+  background: rgba(255,255,255,0.08);
+  padding: 0.52rem 0.58rem;
+  border: 1px solid rgba(255,255,255,0.14);
+  border-radius: 0.75rem;
+  font: inherit;
+  font-size: 0.78rem;
+  font-weight: 900;
+  outline: 0;
+}
+
+.team-customizer option {
+  color: #0f172a;
+}
+
+.move-customizer {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.move-customizer > span {
+  grid-column: 1 / -1;
 }
 
 .team-average-grid {

@@ -181,8 +181,7 @@ export const getPokemonData = async (name) => {
             moves: pokemonData.moves
                 .filter(({ version_group_details }) =>
                     version_group_details.some((detail) => detail.move_learn_method.name === 'level-up')
-                )
-                .slice(0, 8),
+                ),
             hasGenderDiff: speciesData.has_gender_differences,
             hasShinyVer: pokemonData?.sprites?.other['official-artwork']?.front_shiny ? true : false,
             artwork: {

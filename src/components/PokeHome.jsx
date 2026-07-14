@@ -137,6 +137,9 @@ const PokeHome = () => {
     weight: pokemon.weight,
     types: pokemon.types?.map(({ type }) => type.name) || [],
     abilities: pokemon.abilities?.map(({ ability }) => ability.name) || [],
+    selectedAbility: pokemon.abilities?.[0]?.ability?.name || '',
+    moveOptions: pokemon.moves?.map(({ move }) => move.name).filter(Boolean) || [],
+    selectedMoves: pokemon.moves?.map(({ move }) => move.name).filter(Boolean).slice(0, 4) || [],
     stats: pokemon.stats?.map(({ stat, base_stat }) => ({
       name: stat.name,
       value: base_stat,
@@ -183,6 +186,12 @@ const PokeHome = () => {
 
   const removePokemonFromTeam = (index) => {
     setTeam((currentTeam) => currentTeam.map((member, memberIndex) => memberIndex === index ? null : member));
+  };
+
+  const updateTeamMember = (index, updates) => {
+    setTeam((currentTeam) => currentTeam.map((member, memberIndex) => (
+      memberIndex === index && member ? { ...member, ...updates } : member
+    )));
   };
 
   const clearTeam = () => setTeam(Array(6).fill(null));
@@ -431,6 +440,7 @@ const PokeHome = () => {
               onClear={clearTeam}
               onDropPokemon={placePokemonInTeamSlot}
               onMoveMember={moveTeamMember}
+              onUpdateMember={updateTeamMember}
             />
             <FilterDock
               typeOptions={typeOptions}

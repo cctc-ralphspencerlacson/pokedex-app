@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
+import { getPokemonData } from '../../service/pokeapi';
 import './TeamBuilder.css';
 
 const formatName = (name = '') => name
@@ -133,7 +134,7 @@ const getTeamAnalysis = (members) => {
   };
 };
 
-const TeamBuilder = ({ team = [], onRemove, onClear, onDropPokemon, onMoveMember }) => {
+const TeamBuilder = ({ team = [], onRemove, onClear, onDropPokemon, onMoveMember, onUpdateMember }) => {
   const filledCount = team.filter(Boolean).length;
   const [isDragOpen, setIsDragOpen] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(null);
@@ -150,6 +151,25 @@ const TeamBuilder = ({ team = [], onRemove, onClear, onDropPokemon, onMoveMember
     if (selectedIndex !== null && team[selectedIndex]) return;
     setSelectedIndex(team.findIndex(Boolean));
   }, [filledCount, selectedIndex, team]);
+
+  useEffect(() => {
+    if (selectedIndex === null || !selectedMember?.name || (selectedMember.moveOptions?.length || 0) > 4) return;
+
+    let mounted = true;
+    getPokemonData(selectedMember.name).then((pokemon) => {
+      if (!mounted || !pokemon?.moves?.length) return;
+
+      const moveOptions = pokemon.moves.map(({ move }) => move.name).filter(Boolean);
+      onUpdateMember?.(selectedIndex, {
+        moveOptions,
+        selectedMoves: selectedMember.selectedMoves?.length ? selectedMember.selectedMoves : moveOptions.slice(0, 4),
+      });
+    });
+
+    return () => {
+      mounted = false;
+    };
+  }, [onUpdateMember, selectedIndex, selectedMember]);
 
   const handleDragStart = (event, index) => {
     const member = team[index];
@@ -199,6 +219,19 @@ const TeamBuilder = ({ team = [], onRemove, onClear, onDropPokemon, onMoveMember
     if (selectedIndex === null) return;
     onRemove?.(selectedIndex);
     setSelectedIndex(null);
+  };
+
+  const updateSelectedMember = (updates) => {
+    if (selectedIndex === null) return;
+    onUpdateMember?.(selectedIndex, updates);
+  };
+
+  const updateSelectedMove = (moveIndex, moveName) => {
+    if (!selectedMember) return;
+
+    const selectedMoves = Array.from({ length: 4 }, (_, index) => selectedMember.selectedMoves?.[index] || '');
+    selectedMoves[moveIndex] = moveName;
+    updateSelectedMember({ selectedMoves });
   };
 
   return (
@@ -315,6 +348,41 @@ const TeamBuilder = ({ team = [], onRemove, onClear, onDropPokemon, onMoveMember
 
           <div className="type-chip-row">
             {selectedMember.types?.map((type) => <span className="type-chip" key={type}>{formatName(type)}</span>)}
+          </div>
+
+          <div className="team-customizer">
+            <label>
+              <span>Ability</span>
+              <select
+                value={selectedMember.selectedAbility || selectedMember.abilities?.[0] || ''}
+                onChange={(event) => updateSelectedMember({ selectedAbility: event.target.value })}
+              >
+                {(selectedMember.abilities || []).map((ability) => (
+                  <option value={ability} key={ability}>{formatName(ability)}</option>
+                ))}
+              </select>
+            </label>
+
+            <div className="move-customizer">
+              <span>Moves</span>
+              {Array.from({ length: 4 }, (_, moveIndex) => {
+                const selectedMoves = selectedMember.selectedMoves || [];
+                const moveOptions = selectedMember.moveOptions?.length ? selectedMember.moveOptions : selectedMoves.filter(Boolean);
+
+                return (
+                  <select
+                    value={selectedMoves[moveIndex] || ''}
+                    key={`move-${moveIndex}`}
+                    onChange={(event) => updateSelectedMove(moveIndex, event.target.value)}
+                  >
+                    <option value="">Move {moveIndex + 1}</option>
+                    {moveOptions.map((move) => (
+                      <option value={move} key={`${moveIndex}-${move}`}>{formatName(move)}</option>
+                    ))}
+                  </select>
+                );
+              })}
+            </div>
           </div>
 
           {selectedMember.stats?.length > 0 && (
