@@ -242,6 +242,11 @@ export default function ScrollPokedex({ pokemons, onNearEnd, loadingMore, jumpRe
     });
   }, []);
 
+  const getLoopedIndex = useCallback((direction) => {
+    if (!entries.length) return activeIndex;
+    return (activeIndex + direction + entries.length) % entries.length;
+  }, [activeIndex, entries.length]);
+
   const scrollToPokemon = useCallback((pokemonName) => {
     const targetIndex = entries.findIndex((entry) => normalizeName(entry) === pokemonName);
     if (targetIndex >= 0) scrollToIndex(targetIndex);
@@ -316,7 +321,7 @@ export default function ScrollPokedex({ pokemons, onNearEnd, loadingMore, jumpRe
       event.preventDefault();
 
       const direction = event.deltaY > 0 ? 1 : -1;
-      const nextIndex = Math.max(0, Math.min(entries.length - 1, activeIndex + direction));
+      const nextIndex = getLoopedIndex(direction);
       if (nextIndex !== activeIndex) scrollToIndex(nextIndex);
 
       wheelLock = true;
@@ -327,7 +332,7 @@ export default function ScrollPokedex({ pokemons, onNearEnd, loadingMore, jumpRe
 
     scroller.addEventListener('wheel', handleWheel, { passive: false });
     return () => scroller.removeEventListener('wheel', handleWheel);
-  }, [activeIndex, entries.length, scrollToIndex]);
+  }, [activeIndex, getLoopedIndex, scrollToIndex]);
 
   useEffect(() => {
     if (!jumpRequest) return;
@@ -349,13 +354,13 @@ export default function ScrollPokedex({ pokemons, onNearEnd, loadingMore, jumpRe
 
       event.preventDefault();
       const direction = event.key === 'ArrowDown' ? 1 : -1;
-      const nextIndex = Math.max(0, Math.min(entries.length - 1, activeIndex + direction));
+      const nextIndex = getLoopedIndex(direction);
       if (nextIndex !== activeIndex) scrollToIndex(nextIndex);
     };
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [activeIndex, entries.length, scrollToIndex]);
+  }, [activeIndex, getLoopedIndex, scrollToIndex]);
 
   useEffect(() => {
     const handleKeyDown = (event) => {
@@ -384,7 +389,7 @@ export default function ScrollPokedex({ pokemons, onNearEnd, loadingMore, jumpRe
       controlRequest.control === 'wheel-down'
     ) {
       const direction = controlRequest.control === 'down' || controlRequest.control === 'wheel-down' ? 1 : -1;
-      const nextIndex = Math.max(0, Math.min(entries.length - 1, activeIndex + direction));
+      const nextIndex = getLoopedIndex(direction);
       if (nextIndex !== activeIndex) scrollToIndex(nextIndex);
       return;
     }
@@ -395,7 +400,7 @@ export default function ScrollPokedex({ pokemons, onNearEnd, loadingMore, jumpRe
         direction: controlRequest.control === 'right' ? 1 : -1,
       });
     }
-  }, [activeIndex, controlRequest, entries.length, scrollToIndex]);
+  }, [activeIndex, controlRequest, getLoopedIndex, scrollToIndex]);
 
   const getStackState = (index) => {
     const distance = index - activeIndex;
